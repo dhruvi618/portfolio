@@ -1,7 +1,12 @@
+body {
+  background-color: black;
+  color: white;
+  width: 100%;
+}
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 100%;
 }
 
 #greeting-container {
@@ -11,4 +16,27 @@
 div.icons {
     margin: 5px;
     float: left;
+}
+
+div.experience {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    border: 3px solid salmon;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+div.experience h2 {
+    text-align: center;
+}
+
+div.experience img{
+    display: block;
+    margin: auto;
+}
+
+div.experience img:hover{
+    opacity: 0.8;
 }
