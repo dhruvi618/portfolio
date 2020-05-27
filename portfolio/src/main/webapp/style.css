@@ -1,14 +1,86 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #111;
+    color: white;
+}
+
+.navbar {
+    overflow: hidden;
+    padding: 50px 0px 0px 75px;
+}
+
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    color: rgb(224, 46, 106);
+    font-weight: 800;
+}
+
+.navbar a:hover,a.active {
+    color: salmon;
+}
+
+#home {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 250px 100px;
+}
+
+#home a {
+    position: relative;
+    text-decoration: none;
+    background-color: salmon;
+    display: inline-block;
+    margin: 25px 0px 0px 0px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#home h1 {
+    font-size: 56px;
+    font-weight: 1000;
+    padding-bottom: 10px;
+}
+
+#home h3 {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.experience {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    border: 3px solid salmon;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.experience h2 {
+    text-align: center;
+}
+
+.experience img{
+    display: block;
+    margin: auto;
+}
+
+.experience img:hover{
+    opacity: 0.8;
+}
+
+.icons {
+    margin: 5px;
+    float: left;
+    bottom: 50px;
 }
 
 #greeting-container {
-  margin-top: 20px;
-}
-
-div.icons {
-    margin: 5px;
-    float: left;
+    margin-top: 20px;
 }
