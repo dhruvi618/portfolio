@@ -1,10 +1,10 @@
 * {
-  margin:0;
-  padding:0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #111;
-  color: white;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #111;
+    color: white;
 }
 
 .navbar {
@@ -29,8 +29,8 @@
 #home {
     position: relative;
     box-sizing: border-box;
-    min-height: 80vh;
-    padding: 250px 100px;
+    min-height: 50vh;
+    padding: 250px 100px 0px 100px;
 }
 
 #home a {
@@ -46,6 +46,7 @@
 #home h1 {
     font-size: 56px;
     font-weight: 1000;
+    padding-bottom: 10px;
 }
 
 #home h3 {
@@ -64,7 +65,7 @@
 #about img {
     max-width: 300px;
     border-radius: 50%;
-    margin-left: 25px;
+    margin-left: 45px;
 }
 
 #about h2 {
@@ -106,5 +107,5 @@
 }
 
 #greeting-container {
-  margin-top: 20px;
+    margin-top: 20px;
 }
