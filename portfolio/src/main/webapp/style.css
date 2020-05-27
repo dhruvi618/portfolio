@@ -7,16 +7,6 @@
   color: white;
 }
 
-#greeting-container {
-  margin-top: 20px;
-}
-
-.icons {
-    margin: 5px;
-    float: left;
-    bottom: 50px;
-}
-
 .navbar {
     overflow: hidden;
     padding: 50px 0px 0px 75px;
@@ -31,12 +21,7 @@
     font-weight: 800;
 }
 
-.navbar a:hover {
-    color: salmon;
-}
-
-.navbar a.active {
-    text-decoration: none;
+.navbar a:hover,a.active {
     color: salmon;
 }
 
@@ -87,4 +72,14 @@
 
 .experience img:hover{
     opacity: 0.8;
+}
+
+.icons {
+    margin: 5px;
+    float: left;
+    bottom: 50px;
+}
+
+#greeting-container {
+  margin-top: 20px;
 }
