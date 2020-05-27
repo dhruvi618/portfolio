@@ -1,42 +1,94 @@
-body {
-  background-color: black;
-  color: white;
-  width: 100%;
-}
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #greeting-container {
   margin-top: 20px;
 }
 
-div.icons {
+.icons {
     margin: 5px;
     float: left;
+    bottom: 50px;
 }
 
-div.experience {
+.navbar {
+    background-color: #111;
+    overflow: hidden;
+    padding: 50px 0px 0px 100px;
+}
+
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    color: palevioletred;
+    font-weight: 800;
+}
+
+.navbar a:hover {
+    background-color: #111;
+    color: coral;
+}
+
+.navbar a.active {
+    text-decoration: none;
+    color: coral;
+}
+
+#home {
+    position: relative;
+    box-sizing: border-box;
+    background-color: #111;
+    min-height: 100vh;
+    padding: 200px 100px;
+}
+
+#home a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background-color: coral;
+    display: inline-block;
+    margin: 25px 0px 0px 0px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#home h1 {
+    color: white;
+    font-size: 56px;
+    font-weight: 1000;
+}
+
+#home h3 {
+    color: white;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.experience {
     float: left;
     width: 25%;
     padding: 10px;
     border: 3px solid salmon;
-    font-family: 'Montserrat', sans-serif;
     border-radius: 5px;
     margin: 10px;
 }
 
-div.experience h2 {
+.experience h2 {
     text-align: center;
 }
 
-div.experience img{
+.experience img{
     display: block;
     margin: auto;
 }
 
-div.experience img:hover{
+.experience img:hover{
     opacity: 0.8;
 }
