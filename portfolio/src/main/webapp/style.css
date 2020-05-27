@@ -18,7 +18,8 @@
     padding: 15px;
     text-decoration: none;
     color: rgb(224, 46, 106);
-    font-weight: 800;
+    font-weight: 900;
+    font-size: 18px;
 }
 
 .navbar a:hover,a.active {
@@ -28,7 +29,7 @@
 #home {
     position: relative;
     box-sizing: border-box;
-    min-height: 100vh;
+    min-height: 80vh;
     padding: 250px 100px;
 }
 
@@ -50,6 +51,30 @@
 #home h3 {
     font-size: 36px;
     font-weight: 800;
+}
+
+#about {
+    position: relative;
+    align-items: center;
+    display: flex;
+    padding: 100px;
+    min-height: 50vh;
+}
+
+#about img {
+    max-width: 300px;
+    border-radius: 50%;
+    margin-left: 25px;
+}
+
+#about h2 {
+    font-size: 50px;
+    font-weight: 800;
+}
+
+#about p {
+    font-size: 18px;
+    font-weight: 300;
 }
 
 .experience {
