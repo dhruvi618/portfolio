@@ -102,6 +102,12 @@
     margin-top: 20px;
 }
 
+#exp {
+    position: relative;
+    padding: 100px;
+    min-height: 75vh;
+}
+
 .experience {
     float: left;
     width: 25%;
@@ -122,6 +128,24 @@
 
 .experience img:hover{
     opacity: 0.8;
+}
+
+#projects {
+    display: flex;
+    padding: 100px 50px;
+}
+
+#projects h2 {
+    font-size: 50px;
+    font-weight: 800;
+    padding-right: 50px;
+}
+
+#projects.myProj img {
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .icons {

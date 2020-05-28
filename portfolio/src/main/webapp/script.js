@@ -29,3 +29,20 @@ function addRandomFunFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
+var i = 1;
+var projects = ["images/proj1.png","images/proj2.png","images/proj3.png","images/proj4.png"];
+var time = 3000;
+
+window.setInterval(function(){
+  changeProject();
+}, time);
+
+function changeProject() {
+    document.getElementById("currProj").src = projects[i];
+    if (i < projects.length-1) {
+        i++;
+    } else {
+        i=0;
+    }
+}
