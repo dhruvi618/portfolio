@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const facts = [
+    "I have lived in three countries: India, Canada, and the US!", 
+    "I can speak/understand 4 different languages!", 
+    "I love eating Chocolate Chip Cookie Dough ice cream!", 
+    "I have only visited 8 of the 50 US states!"
+];
+
 /**
  * Adds a random fun fact to the page.
  */
 function addRandomFunFact() {
-  const facts =
-      ['I have lived in three countries: India, Canada, and the US!', 
-        'I can speak/understand 4 different languages!', 
-        'I love eating Chocolate Chip Cookie Dough ice cream!', 
-        'I have only visited 8 of the 50 US states!'];
-
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
 
