@@ -43,7 +43,7 @@ function changeProject() {
     if (currentProjIndex < projects.length-1) {
         currentProjIndex++;
     } else {
-        currentProjIndex=0;
+        currentProjIndex = 0;
     }
     document.getElementById("currProj").src = projects[currentProjIndex];
 }
