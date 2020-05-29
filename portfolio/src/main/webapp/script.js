@@ -45,7 +45,6 @@ function changeProject() {
         currentProjIndex = 0;
     }
     document.getElementById("currProj").src = projects[currentProjIndex];
-    
     changeCurrProj = setTimeout("changeProject()", changeProjectTimeMs);
 }
 
