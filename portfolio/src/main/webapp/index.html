@@ -8,9 +8,8 @@
     </head>
     <body>
         <div class="navbar">
-            <a class="active" href="#home">Home</a>
-            <!--TODO: implement About Me section-->
-            <a href="#">About Me</a>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About Me</a>
             <!--TODO: implement Experience section-->
             <a href="#">Experience</a>
             <!--TODO: implement Projects section-->
@@ -20,11 +19,30 @@
         </div>
         <section id="home">
             <div>
-                <h1>I'm Dhruvi Sheth.</h1>
+                <h2>Hello! I'm</h2>
+                <h1>Dhruvi Sheth.</h1>
                 <h3>Student | Aspiring Software Engineer | Tech Enthusiast</h3>
-                <a href="#">Learn More</a>
+                <a href="#contact">Get In Touch</a>
             </div>
         </section> 
+        <section id="about">
+            <div>
+                <h2>About Me</h2>
+                <p>I am a junior studying Computer Science at Rutgers University-New Brunswick. 
+                I was born in India, raised in Canada, and currently live in the United States. 
+                My hobbies include cooking (especially experimenting with new recipes), 
+                traveling, and spending time with my family and friends. On campus, I am the Co-
+                President of Rutgers Women in Information Technology and Informatics, an 
+                organization built on the foundation of supporting and providing opportunities 
+                to women in the technology industry. I also serve as a Computer Science Peer 
+                Tutor for introductory computer science classes like Data Structures. 
+                Additionally, I work as a Technology Intern at the Rutgers Office of Career 
+                Exploration and Success.</p>
+                <button onclick="addRandomFunFact()">Click for a fun fact!</button>
+                <div id="fact-container"></div>
+            </div>
+            <img src="images/dhruvi.jpg" alt="Dhruvi">
+        </section>
         <section id="exp">
             <div class="experience">
                 <img src="images/google.png" alt="Google Logo" width="100" height="100">
@@ -33,7 +51,7 @@
                 <p>Web App</p>
             </div>
             <div class="experience">
-                <img src="images/rutgers.png" alt="Rutgers Logo" width="100" height="100">
+                <img src="images/rutgerslogo.png" alt="Rutgers Logo" width="100" height="100">
                 <h2>Rutgers University</h2>
                 <p>Technology Intern</p>
                 <p>Handshake</p>
@@ -56,9 +74,6 @@
                     <img alt="Dhruvi Sheth's Github Profile" src="images/github.png" width="25" height="25">
                 </a>
             </div>
-            <p>Click here to get a random message:</p>
-            <button onclick="addRandomGreeting()">Hello</button>
-            <div id="greeting-container"></div>
         </section>
     </body>
 </html>
