@@ -31,7 +31,7 @@ function addRandomFunFact() {
   factContainer.innerText = fact;
 }
 
-var currentlyDisplayedProjectIndex = 0;
+var currentProjIndex = 0;
 var projects = ["images/proj1.png", "images/proj2.png", "images/proj3.png", "images/proj4.png"];
 var changeProjectTimeMs = 3000;
 
@@ -40,10 +40,10 @@ window.setInterval(function(){
 }, changeProjectTimeMs);
 
 function changeProject() {
-    if (currentlyDisplayedProjectIndex < projects.length-1) {
-        currentlyDisplayedProjectIndex++;
+    if (currentProjIndex < projects.length-1) {
+        currentProjIndex++;
     } else {
-        currentlyDisplayedProjectIndex=0;
+        currentProjIndex=0;
     }
-    document.getElementById("currProj").src = projects[currentlyDisplayedProjectIndex];
+    document.getElementById("currProj").src = projects[currentProjIndex];
 }
