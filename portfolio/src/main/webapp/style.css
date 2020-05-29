@@ -106,8 +106,7 @@
 #exp {
     position: relative;
     padding: 100px;
-    width: auto;
-    height: auto;
+    min-height: 100vh;
     align-content: center;
 }
 
@@ -162,7 +161,7 @@
 }
 
 #projects {
-    padding: 200px 100px 0px 100px;
+    padding: 0 100px 0px 100px;
     min-height: 70vh;
 }
 
