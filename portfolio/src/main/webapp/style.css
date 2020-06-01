@@ -55,13 +55,13 @@
 
 #home h2 {
     font-size: 56px;
-    font-weight: 900;
+    font-weight: 1000;
     padding-bottom: 20px;
 }
 
 #home h3 {
     font-size: 48px;
-    font-weight: 800;
+    font-weight: 1000;
 }
 
 #about {
@@ -81,17 +81,18 @@
 
 #about h2 {
     font-size: 50px;
-    font-weight: 800;
+    font-weight: 1000;
+    color: pink;
 }
 
 #about p {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 1000;
 }
 
 #about button {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 1000;
     background-color: salmon;
     display: inline-block;
     margin: 25px 0px 0px 0px;
@@ -102,30 +103,106 @@
     margin-top: 20px;
 }
 
+#exp {
+    position: relative;
+    padding: 100px;
+    min-height: 100vh;
+    align-content: center;
+}
+
+#exp.exp-row {
+    height: auto;
+    justify-content: center;
+    align-items: center; 
+}
+
+#exp h2 {
+    font-size: 50px;
+    font-weight: 1000;
+    padding-right: 100px;
+    padding-bottom: 50px;
+    color: pink;
+}
+
 .experience {
     float: left;
-    width: 25%;
+    width: 300px;
+    height: auto;
     padding: 10px;
     border: 3px solid salmon;
     border-radius: 5px;
     margin: 10px;
 }
 
-.experience h2 {
+.experience h3 {
+    font-size: 24px;
+    font-weight: 1000;
     text-align: center;
+    color: white;
+    padding-top: 5px;
 }
 
+.experience p {
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+    padding-top: 5px;
+}
+
+
 .experience img{
-    display: block;
-    margin: auto;
+    width: 30%;
+    height: auto;
 }
 
 .experience img:hover{
     opacity: 0.8;
 }
 
+#projects {
+    padding: 0 100px 0px 100px;
+    min-height: 70vh;
+}
+
+#projects h2 {
+    font-size: 50px;
+    font-weight: 1000;
+    color: pink;
+}
+
+#projects.myProj img {
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contact {
+    position: relative;
+    padding: 100px;
+    min-height: 75vh;
+}
+
+#contact h2 {
+    font-size: 50px;
+    font-weight: 1000;
+    color: pink;
+    padding-bottom: 50px;
+}
+
+#contact.contact-info {
+    margin: auto;
+    width: 50%;
+}
+
 .icons {
-    margin: 5px;
-    float: left;
-    bottom: 50px;
+    padding-right: 25px;
+    float:left;
+}
+
+.icons img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }

@@ -30,3 +30,22 @@ function addRandomFunFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
+var currentProjIndex = 0;
+var projects = ["images/proj1.png", "images/proj2.png", "images/proj3.png", "images/proj4.png"];
+const changeProjectTimeMs = 5000;
+var changeCurrProj;
+
+function changeProject() {
+    if (currentProjIndex < projects.length-1) {
+        currentProjIndex++;
+    } else {
+        currentProjIndex = 0;
+    }
+    document.getElementById("currProj").src = projects[currentProjIndex];
+    changeCurrProj = setTimeout("changeProject()", changeProjectTimeMs);
+}
+
+function pauseProjectChange() {
+    clearTimeout(changeCurrProj);
+}

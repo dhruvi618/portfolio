@@ -6,16 +6,13 @@
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
     </head>
-    <body>
+    <body onload="changeProject()">
         <div class="navbar">
             <a href="#home" class="active">Home</a>
             <a href="#about">About Me</a>
-            <!--TODO: implement Experience section-->
-            <a href="#">Experience</a>
-            <!--TODO: implement Projects section-->
-            <a href="#">Projects</a>
-            <!--TODO: implement Contact section-->
-            <a href="#">Contact</a>
+            <a href="#exp">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
         <section id="home">
             <div>
@@ -44,35 +41,57 @@
             <img src="images/dhruvi.jpg" alt="Dhruvi">
         </section>
         <section id="exp">
+            <h2>Experiences</h2>
             <div class="experience">
                 <img src="images/google.png" alt="Google Logo" width="100" height="100">
-                <h2>Google</h2>
+                <h3>Google</h3>
                 <p>STEP Intern</p>
-                <p>Web App</p>
+                <p>Summer 2020</p>
+                <p>Designed and developed a portfolio web application using HTML/CSS/JS 
+                detailing personal projects, experiences, and career goals.</p>
             </div>
             <div class="experience">
                 <img src="images/rutgerslogo.png" alt="Rutgers Logo" width="100" height="100">
-                <h2>Rutgers University</h2>
+                <h3>Rutgers University</h3>
                 <p>Technology Intern</p>
-                <p>Handshake</p>
+                <p>August 2019-May 2020</p>
+                <p>Provided technical support to users and coordinated with leadership to 
+                innovate and develop efficient technical solutions to better serve users.</p>
             </div>
             <div class="experience">
-                <img src="images/icims.png" alt="iCIMS Logo" width="100" height="100">
-                <h2>iCIMS</h2>
+                <img src="images/icims.png" alt="iCIMS Logo" width="100" height="100"> 
+                <h3>iCIMS</h3>
                 <p>SWE Intern</p>
-                <p>Java Backend</p>      
+                <p>Summer 2019</p>
+                <p>Collaborated with an agile team to develop a service that instantaneously 
+                sets up third-party vendor integrations with the company's platform.</p>    
+            </div>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div id="myProj">
+                <img src="images/proj1.png" alt="Dhruvi's Project" style="width: 65%" id="currProj" 
+                onmouseover="pauseProjectChange()" onmouseout="changeProject()">
             </div>
         </section>
         <section id="contact">   
-            <div class="icons"> 
-                <a href="https://www.linkedin.com/in/dhruvi-sheth">
-                    <img alt="Dhruvi Sheth's Linkedin Profile" src="images/linkedin.png" width="30" height="25">
-                </a>
-            </div>
-            <div class="icons">
-                <a href="https://github.com/dhruvi618">
-                    <img alt="Dhruvi Sheth's Github Profile" src="images/github.png" width="25" height="25">
-                </a>
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <div class="icons"> 
+                    <a href="https://www.linkedin.com/in/dhruvi-sheth">
+                        <img alt="Dhruvi Sheth's Linkedin Profile" src="images/linkedin.png">
+                    </a>
+                </div>
+                <div class="icons">
+                    <a href="https://github.com/dhruvi618">
+                        <img alt="Dhruvi Sheth's Github Profile" src="images/github.png">
+                    </a>
+                </div>
+                <div class="icons">
+                    <a href="mailto:dhruvisheth18@gmail.com">
+                        <img alt="Dhruvi Sheth's Email" src="images/email.png">
+                    </a>
+                </div>
             </div>
         </section>
     </body>
