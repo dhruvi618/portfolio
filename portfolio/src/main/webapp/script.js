@@ -33,7 +33,7 @@ function addRandomFunFact() {
 
 var currentProjIndex = 0;
 var projects = ["images/proj1.png", "images/proj2.png", "images/proj3.png", "images/proj4.png"];
-var changeProjectTimeMs = 5000;
+const changeProjectTimeMs = 5000;
 var changeCurrProj;
 
 function changeProject() {
