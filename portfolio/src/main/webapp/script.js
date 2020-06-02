@@ -49,3 +49,9 @@ function changeProject() {
 function pauseProjectChange() {
     clearTimeout(changeCurrProj);
 }
+
+function fetchMessage() {
+    fetch('/data').then(response => response.text()).then((quote) => {
+        document.getElementById('message-container').innerText = quote;
+    });
+}
