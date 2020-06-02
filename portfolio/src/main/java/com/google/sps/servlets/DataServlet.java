@@ -27,20 +27,42 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  private List<String> messages;
-
-  @Override
-  public void init() {
-    messages = new ArrayList<>();
-    messages.add("This is the first message");
-    messages.add("This is the second message");
-    messages.add("This is the third message");
-  }
+  private List<String> comments = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("application/json");
     Gson gson = new Gson();
-    String json = gson.toJson(messages);
+    String json = gson.toJson(comments);
     response.getWriter().println(json);
   }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getParameter(request, "text-input", "");
+    
+    // Store comment in data structure
+    comments.add(text);
+    
+    // Add comment to /data server
+    response.setContentType("text/html;");
+    response.getWriter().println(comments);
+
+    //Redirect user back to the same page
+    response.sendRedirect("/index.html");
+  }
+
+  /**
+  * @return the request parameter, or the default value if the parameter
+  *         was not specified by the client
+  */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
 }

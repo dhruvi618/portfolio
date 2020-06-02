@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function onWindowLoad() {
+  fetchMessage();
+  changeProject();
+}
+
 const facts = [
   "I have lived in three countries: India, Canada, and the US!", 
   "I can speak/understand 4 different languages!", 
@@ -52,6 +57,17 @@ function pauseProjectChange() {
 
 function fetchMessage() {
   fetch('/data').then(response => response.json()).then((message) => {
-    document.getElementById('message-container').innerText = message;
+    // Build a list of comment entries.
+    const commentsContainer = document.getElementById('comments-container');
+    message.forEach((line) => {
+      commentsContainer.appendChild(createParagraphElement(line));
+    });
   });
+}
+
+/** Creates an <p> element containing text. */
+function createParagraphElement(text) {
+  const paragraphElement = document.createElement('p');
+  paragraphElement.innerText = text;
+  return paragraphElement;
 }

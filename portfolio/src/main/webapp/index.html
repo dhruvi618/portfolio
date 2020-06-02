@@ -1,102 +1,107 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Dhruvi Sheth</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
-    </head>
-    <body onload="changeProject()">
-        <div class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About Me</a>
-            <a href="#exp">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dhruvi Sheth</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body onload="onWindowLoad()">
+    <div class="navbar">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About Me</a>
+      <a href="#exp">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <section id="home">
+      <div>
+        <h2>Hello! I'm</h2>
+        <h1>Dhruvi Sheth.</h1>
+        <h3>Student | Aspiring Software Engineer | Tech Enthusiast</h3>
+        <a href="#contact">Get In Touch</a>
+      </div>
+    </section> 
+    <section id="about">
+      <div>
+        <h2>About Me</h2>
+        <p>I am a junior studying Computer Science at Rutgers University-New Brunswick. 
+        I was born in India, raised in Canada, and currently live in the United States. 
+        My hobbies include cooking (especially experimenting with new recipes), 
+        traveling, and spending time with my family and friends. On campus, I am the Co-
+        President of Rutgers Women in Information Technology and Informatics, an 
+        organization built on the foundation of supporting and providing opportunities 
+        to women in the technology industry. I also serve as a Computer Science Peer 
+        Tutor for introductory computer science classes like Data Structures. 
+        Additionally, I work as a Technology Intern at the Rutgers Office of Career 
+        Exploration and Success.</p>
+        <button onclick="addRandomFunFact()">Click for a fun fact!</button>
+        <div id="fact-container"></div>
+      </div>
+      <img src="images/dhruvi.jpg" alt="Dhruvi">
+    </section>
+    <section id="exp">
+      <h2>Experiences</h2>
+      <div class="experience">
+        <img src="images/google.png" alt="Google Logo" width="100" height="100">
+        <h3>Google</h3>
+        <p>STEP Intern</p>
+        <p>Summer 2020</p>
+        <p>Designed and developed a portfolio web application using HTML/CSS/JS 
+        detailing personal projects, experiences, and career goals.</p>
+      </div>
+      <div class="experience">
+        <img src="images/rutgerslogo.png" alt="Rutgers Logo" width="100" height="100">
+        <h3>Rutgers University</h3>
+        <p>Technology Intern</p>
+        <p>August 2019-May 2020</p>
+        <p>Provided technical support to users and coordinated with leadership to 
+        innovate and develop efficient technical solutions to better serve users.</p>
+      </div>
+      <div class="experience">
+        <img src="images/icims.png" alt="iCIMS Logo" width="100" height="100"> 
+        <h3>iCIMS</h3>
+        <p>SWE Intern</p>
+        <p>Summer 2019</p>
+        <p>Collaborated with an agile team to develop a service that instantaneously 
+        sets up third-party vendor integrations with the company's platform.</p>    
+      </div>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div id="myProj">
+        <img src="images/proj1.png" alt="Dhruvi's Project" style="width: 65%" id="currProj" 
+        onmouseover="pauseProjectChange()" onmouseout="changeProject()">
+      </div>
+    </section>
+    <section id="contact">   
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <div class="icons"> 
+          <a href="https://www.linkedin.com/in/dhruvi-sheth">
+            <img alt="Dhruvi Sheth's Linkedin Profile" src="images/linkedin.png">
+          </a>
         </div>
-        <section id="home">
-            <div>
-                <h2>Hello! I'm</h2>
-                <h1>Dhruvi Sheth.</h1>
-                <h3>Student | Aspiring Software Engineer | Tech Enthusiast</h3>
-                <a href="#contact">Get In Touch</a>
-            </div>
-        </section> 
-        <section id="about">
-            <div>
-                <h2>About Me</h2>
-                <p>I am a junior studying Computer Science at Rutgers University-New Brunswick. 
-                I was born in India, raised in Canada, and currently live in the United States. 
-                My hobbies include cooking (especially experimenting with new recipes), 
-                traveling, and spending time with my family and friends. On campus, I am the Co-
-                President of Rutgers Women in Information Technology and Informatics, an 
-                organization built on the foundation of supporting and providing opportunities 
-                to women in the technology industry. I also serve as a Computer Science Peer 
-                Tutor for introductory computer science classes like Data Structures. 
-                Additionally, I work as a Technology Intern at the Rutgers Office of Career 
-                Exploration and Success.</p>
-                <button onclick="addRandomFunFact()">Click for a fun fact!</button>
-                <div id="fact-container"></div>
-            </div>
-            <img src="images/dhruvi.jpg" alt="Dhruvi">
-        </section>
-        <section id="exp">
-            <h2>Experiences</h2>
-            <div class="experience">
-                <img src="images/google.png" alt="Google Logo" width="100" height="100">
-                <h3>Google</h3>
-                <p>STEP Intern</p>
-                <p>Summer 2020</p>
-                <p>Designed and developed a portfolio web application using HTML/CSS/JS 
-                detailing personal projects, experiences, and career goals.</p>
-            </div>
-            <div class="experience">
-                <img src="images/rutgerslogo.png" alt="Rutgers Logo" width="100" height="100">
-                <h3>Rutgers University</h3>
-                <p>Technology Intern</p>
-                <p>August 2019-May 2020</p>
-                <p>Provided technical support to users and coordinated with leadership to 
-                innovate and develop efficient technical solutions to better serve users.</p>
-            </div>
-            <div class="experience">
-                <img src="images/icims.png" alt="iCIMS Logo" width="100" height="100"> 
-                <h3>iCIMS</h3>
-                <p>SWE Intern</p>
-                <p>Summer 2019</p>
-                <p>Collaborated with an agile team to develop a service that instantaneously 
-                sets up third-party vendor integrations with the company's platform.</p>    
-            </div>
-        </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div id="myProj">
-                <img src="images/proj1.png" alt="Dhruvi's Project" style="width: 65%" id="currProj" 
-                onmouseover="pauseProjectChange()" onmouseout="changeProject()">
-            </div>
-        </section>
-        <section id="contact">   
-            <h2>Contact</h2>
-            <div class="contact-info">
-                <div class="icons"> 
-                    <a href="https://www.linkedin.com/in/dhruvi-sheth">
-                        <img alt="Dhruvi Sheth's Linkedin Profile" src="images/linkedin.png">
-                    </a>
-                </div>
-                <div class="icons">
-                    <a href="https://github.com/dhruvi618">
-                        <img alt="Dhruvi Sheth's Github Profile" src="images/github.png">
-                    </a>
-                </div>
-                <div class="icons">
-                    <a href="mailto:dhruvisheth18@gmail.com">
-                        <img alt="Dhruvi Sheth's Email" src="images/email.png">
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section>
-            <button onclick="fetchMessage()">Click for a message!</button>
-            <div id="message-container"></div>
-        </section>
-    </body>
+        <div class="icons">
+          <a href="https://github.com/dhruvi618">
+            <img alt="Dhruvi Sheth's Github Profile" src="images/github.png">
+          </a>
+        </div>
+        <div class="icons">
+          <a href="mailto:dhruvisheth18@gmail.com">
+            <img alt="Dhruvi Sheth's Email" src="images/email.png">
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="form">
+      <form action="/data" method="POST">
+        <p>Please leave a comment!</p>
+        <textarea name="text-input">Insert comment here!</textarea>
+        <br/><br/>
+        <input type="submit"/>
+      </form>
+      <div id="comments-container"></div>
+    </section>
+  </body>
 </html>
