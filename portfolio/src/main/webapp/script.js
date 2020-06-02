@@ -13,10 +13,10 @@
 // limitations under the License.
 
 const facts = [
-    "I have lived in three countries: India, Canada, and the US!", 
-    "I can speak/understand 4 different languages!", 
-    "I love eating Chocolate Chip Cookie Dough ice cream!", 
-    "I have only visited 8 of the 50 US states!"
+  "I have lived in three countries: India, Canada, and the US!", 
+  "I can speak/understand 4 different languages!", 
+  "I love eating Chocolate Chip Cookie Dough ice cream!", 
+  "I have only visited 8 of the 50 US states!"
 ];
 
 /**
@@ -37,15 +37,21 @@ const changeProjectTimeMs = 5000;
 var changeCurrProj;
 
 function changeProject() {
-    if (currentProjIndex < projects.length-1) {
-        currentProjIndex++;
-    } else {
-        currentProjIndex = 0;
-    }
-    document.getElementById("currProj").src = projects[currentProjIndex];
-    changeCurrProj = setTimeout("changeProject()", changeProjectTimeMs);
+  if (currentProjIndex < projects.length-1) {
+    currentProjIndex++;
+  } else {
+    currentProjIndex = 0;
+  }
+  document.getElementById("currProj").src = projects[currentProjIndex];
+  changeCurrProj = setTimeout("changeProject()", changeProjectTimeMs);
 }
 
 function pauseProjectChange() {
-    clearTimeout(changeCurrProj);
+  clearTimeout(changeCurrProj);
+}
+
+function fetchMessage() {
+  fetch('/data').then(response => response.text()).then((quote) => {
+    document.getElementById('message-container').innerText = quote;
+  });
 }
