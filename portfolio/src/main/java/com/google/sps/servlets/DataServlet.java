@@ -26,20 +26,20 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     
-    private ArrayList<String> messages;
+  private ArrayList<String> messages;
 
-    @Override
-    public void init() {
-        messages = new ArrayList<>();
-        messages.add("This is the first message");
-        messages.add("This is the second message");
-        messages.add("This is the third message");
-    }
+  @Override
+  public void init() {
+    messages = new ArrayList<>();
+    messages.add("This is the first message");
+    messages.add("This is the second message");
+    messages.add("This is the third message");
+  }
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String json = gson.toJson(messages);
-        response.getWriter().println(json);
-    }
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Gson gson = new Gson();
+    String json = gson.toJson(messages);
+    response.getWriter().println(json);
+  }
 }
