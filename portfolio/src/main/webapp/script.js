@@ -51,7 +51,7 @@ function pauseProjectChange() {
 }
 
 function fetchMessage() {
-    fetch('/data').then(response => response.text()).then((quote) => {
-        document.getElementById('message-container').innerText = quote;
+    fetch('/data').then(response => response.json()).then((message) => {
+        document.getElementById('message-container').innerText = message;
     });
 }
