@@ -79,6 +79,5 @@ function createParagraphElement(text) {
 
 /** Creates an <div> element containing comment object. */
 function createDivElement() {
-  const divElement = document.createElement('div');
-  return divElement;
+  return divElement = document.createElement('div');
 }
