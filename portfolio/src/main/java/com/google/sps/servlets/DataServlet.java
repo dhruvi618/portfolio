@@ -37,14 +37,14 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  // Create Datastore instance to interact with the Datastore
+  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
   /** Retrieves and outputs JSON based on all user comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Create Query instance for Comment entities and sort based on time recieved 
+    // Create Query instance for Comment entities and sort by most recent comment first
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-
-    // Create Datastore instance to interact with the Datastore
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     // Contains all entities of type Comment in the Datastore 
     PreparedQuery results = datastore.prepare(query);
@@ -65,7 +65,7 @@ public class DataServlet extends HttpServlet {
     }
 
     // Convert list of comments stored in the Datastore to JSON using Gson
-    response.setContentType("application/json;");
+    response.setContentType("application/json");
     String json = new Gson().toJson(comments);
     response.getWriter().println(json);
   }
@@ -86,10 +86,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("text", text);
-    commentEntity.setProperty("timestamp",timestamp);
-
-    // Create datastore variable that allows for interatction with Datastore
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    commentEntity.setProperty("timestamp", timestamp);
 
     // Store entity in Datastore
     datastore.put(commentEntity);
