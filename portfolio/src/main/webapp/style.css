@@ -1,174 +1,174 @@
 * {
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #111;
-    color: white;
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #111;
+  color: white;
 }
 
 .navbar {
-    overflow: hidden;
-    padding: 50px 0px 0px 75px;
+  overflow: hidden;
+  padding: 50px 0px 0px 75px;
 }
 
 .navbar a {
-    float: left;
-    text-align: center;
-    padding: 15px;
-    text-decoration: none;
-    color: rgb(224, 46, 106);
-    font-weight: 900;
-    font-size: 24px;
+  float: left;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  color: rgb(224, 46, 106);
+  font-weight: 900;
+  font-size: 24px;
 }
 
 .navbar a:hover,a.active {
-    color: salmon;
+  color: salmon;
 }
 
 #home {
-    position: relative;
-    box-sizing: border-box;
-    min-height: 80vh;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 80vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #home a {
-    position: relative;
-    text-decoration: none;
-    background-color: salmon;
-    display: inline-block;
-    margin: 25px 0px 0px 0px;
-    padding: 10px;
-    border-radius: 5px;
+  position: relative;
+  text-decoration: none;
+  background-color: salmon;
+  display: inline-block;
+  margin: 25px 0px 0px 0px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 #home h1 {
-    font-size: 72px;
-    font-weight: 1000;
-    padding-bottom: 15px;
-    color: pink;
+  font-size: 72px;
+  font-weight: 1000;
+  padding-bottom: 15px;
+  color: pink;
 }
 
 #home h2 {
-    font-size: 56px;
-    font-weight: 1000;
-    padding-bottom: 20px;
+  font-size: 56px;
+  font-weight: 1000;
+  padding-bottom: 20px;
 }
 
 #home h3 {
-    font-size: 48px;
-    font-weight: 1000;
+  font-size: 48px;
+  font-weight: 1000;
 }
 
 #about {
-    position: relative;
-    align-items: center;
-    display: flex;
-    padding: 100px;
-    min-height: 75vh;
+  position: relative;
+  align-items: center;
+  display: flex;
+  padding: 100px;
+  min-height: 75vh;
 }
 
 #about img {
-    max-width: 300px;
-    border-radius: 50%;
-    margin-left: 150px;
-    margin-right: 50px;
+  max-width: 300px;
+  border-radius: 50%;
+  margin-left: 150px;
+  margin-right: 50px;
 }
 
 #about h2 {
-    font-size: 50px;
-    font-weight: 1000;
-    color: pink;
+  font-size: 50px;
+  font-weight: 1000;
+  color: pink;
 }
 
 #about p {
-    font-size: 18px;
-    font-weight: 1000;
+  font-size: 18px;
+  font-weight: 1000;
 }
 
 #about button {
-    font-size: 18px;
-    font-weight: 1000;
-    background-color: salmon;
-    display: inline-block;
-    margin: 25px 0px 0px 0px;
-    padding: 10px;
+  font-size: 18px;
+  font-weight: 1000;
+  background-color: salmon;
+  display: inline-block;
+  margin: 25px 0px 0px 0px;
+  padding: 10px;
 }
 
 #fact-container {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #exp {
-    position: relative;
-    padding: 100px;
-    min-height: 100vh;
-    align-content: center;
+  position: relative;
+  padding: 100px;
+  min-height: 100vh;
+  align-content: center;
 }
 
 #exp.exp-row {
-    height: auto;
-    justify-content: center;
-    align-items: center; 
+  height: auto;
+  justify-content: center;
+  align-items: center; 
 }
 
 #exp h2 {
-    font-size: 50px;
-    font-weight: 1000;
-    padding-right: 100px;
-    padding-bottom: 50px;
-    color: pink;
+  font-size: 50px;
+  font-weight: 1000;
+  padding-right: 100px;
+  padding-bottom: 50px;
+  color: pink;
 }
 
 .experience {
-    float: left;
-    width: 300px;
-    height: auto;
-    padding: 10px;
-    border: 3px solid salmon;
-    border-radius: 5px;
-    margin: 10px;
+  float: left;
+  width: 300px;
+  height: auto;
+  padding: 10px;
+  border: 3px solid salmon;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .experience h3 {
-    font-size: 24px;
-    font-weight: 1000;
-    text-align: center;
-    color: white;
-    padding-top: 5px;
+  font-size: 24px;
+  font-weight: 1000;
+  text-align: center;
+  color: white;
+  padding-top: 5px;
 }
 
 .experience p {
-    font-size: 18px;
-    font-weight: 900;
-    text-align: center;
-    color: white;
-    padding-top: 5px;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  color: white;
+  padding-top: 5px;
 }
 
 
 .experience img{
-    width: 30%;
-    height: auto;
+  width: 30%;
+  height: auto;
 }
 
 .experience img:hover{
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 #projects {
-    padding: 0 100px 0px 100px;
-    min-height: 70vh;
+  padding: 0 100px 0px 100px;
+  min-height: 70vh;
 }
 
 #projects h2 {
-    font-size: 50px;
-    font-weight: 1000;
-    color: pink;
+  font-size: 50px;
+  font-weight: 1000;
+  color: pink;
 }
 
 #projects.myProj img {
@@ -179,30 +179,30 @@
 }
 
 #contact {
-    position: relative;
-    padding: 100px;
-    min-height: 75vh;
+  position: relative;
+  padding: 100px;
+  min-height: 75vh;
 }
 
 #contact h2 {
-    font-size: 50px;
-    font-weight: 1000;
-    color: pink;
-    padding-bottom: 50px;
+  font-size: 50px;
+  font-weight: 1000;
+  color: pink;
+  padding-bottom: 50px;
 }
 
 #contact.contact-info {
-    margin: auto;
-    width: 50%;
+  margin: auto;
+  width: 50%;
 }
 
 .icons {
-    padding-right: 25px;
-    float:left;
+  padding-right: 25px;
+  float:left;
 }
 
 .icons img {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
