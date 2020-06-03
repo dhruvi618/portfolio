@@ -47,7 +47,7 @@ public class DataServlet extends HttpServlet {
     String text = getParameter(request, "text-input", "");
 
     // Create comment object with the inputted values in each field
-    Comment comment = new Comment(name,email,text);
+    Comment comment = new Comment(name, email, text);
 
     // Store comment in data structure
     comments.add(comment);
@@ -56,7 +56,7 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     response.getWriter().println(comments);
 
-    //Redirect user back to the same page
+    // Redirect user back to the same page
     response.sendRedirect("/index.html");
   }
 
