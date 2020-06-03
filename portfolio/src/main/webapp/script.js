@@ -13,7 +13,7 @@
 // limitations under the License.
 
 function onWindowLoad() {
-  fetchMessage();
+  fetchCommentAndDisplay();
   changeProject();
 }
 
@@ -24,9 +24,7 @@ const facts = [
   "I have only visited 8 of the 50 US states!"
 ];
 
-/**
- * Adds a random fun fact to the page.
- */
+/** Adds a random fun fact to the page */
 function addRandomFunFact() {
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
@@ -41,6 +39,7 @@ var projects = ["images/proj1.png", "images/proj2.png", "images/proj3.png", "ima
 const changeProjectTimeMs = 5000;
 var changeCurrProj;
 
+/** Advances to the next project slide */
 function changeProject() {
   if (currentProjIndex < projects.length-1) {
     currentProjIndex++;
@@ -51,16 +50,22 @@ function changeProject() {
   changeCurrProj = setTimeout("changeProject()", changeProjectTimeMs);
 }
 
+/** Pauses project slideshow on mouse hover */
 function pauseProjectChange() {
   clearTimeout(changeCurrProj);
 }
 
-function fetchMessage() {
-  fetch('/data').then(response => response.json()).then((message) => {
-    // Build a list of comment entries.
+/** Fetches comment(s) and updates the UI to display */
+function fetchCommentAndDisplay() {
+  fetch('/data').then(response => response.json()).then((comments) => {
     const commentsContainer = document.getElementById('comments-container');
-    message.forEach((line) => {
-      commentsContainer.appendChild(createParagraphElement(line));
+    comments.forEach((comment) => {
+      const currentCommentContainer = createDivElement();
+      currentCommentContainer.style.padding = "50px 0px";
+      commentsContainer.appendChild(currentCommentContainer);
+      currentCommentContainer.appendChild(createParagraphElement(comment.name));
+      currentCommentContainer.appendChild(createParagraphElement(comment.email));
+      currentCommentContainer.appendChild(createParagraphElement(comment.text));
     });
   });
 }
@@ -70,4 +75,10 @@ function createParagraphElement(text) {
   const paragraphElement = document.createElement('p');
   paragraphElement.innerText = text;
   return paragraphElement;
+}
+
+/** Creates an <div> element containing comment object. */
+function createDivElement() {
+  const divElement = document.createElement('div');
+  return divElement;
 }
