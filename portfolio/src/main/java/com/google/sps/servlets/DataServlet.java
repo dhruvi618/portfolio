@@ -14,31 +14,60 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
-import com.google.gson.Gson;
 
 /** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  
-  private List<Comment> comments = new ArrayList<>();
 
-  /** Outputs JSON based on all user comments */
+  // Create Datastore instance to interact with the Datastore
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+  /** Retrieves and outputs JSON based on all user comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Create Query instance for Comment entities and sort by most recent comment first
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
+    // Contains all entities of type Comment in the Datastore 
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      
+      // Retrieve stored values from datastore
+      String name = (String) entity.getProperty("name");
+      String email = (String) entity.getProperty("email");
+      String text = (String) entity.getProperty("text");
+
+      // Create comment object with the inputted values in each field
+      Comment comment = new Comment(name, email, text);
+      
+      // Store comment in data structure
+      comments.add(comment);
+    }
+
+    // Convert list of comments stored in the Datastore to JSON using Gson
     response.setContentType("application/json");
     String json = new Gson().toJson(comments);
     response.getWriter().println(json);
   }
 
-  /** Creates and outputs Comment object based on user-inputted values */
+  /** Creates and stores a comment entity based on user-inputted values */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
@@ -46,17 +75,20 @@ public class DataServlet extends HttpServlet {
     String email = getParameter(request, "email", "");
     String text = getParameter(request, "text-input", "");
 
-    // Create comment object with the inputted values in each field
-    Comment comment = new Comment(name, email, text);
+    // Get timestamp of when comment was submitted for sorting purposes
+    long timestamp = System.currentTimeMillis();
 
-    // Store comment in data structure
-    comments.add(comment);
-    
-    // Add comment to /data server
-    response.setContentType("text/html;");
-    response.getWriter().println(comments);
+    // Create datastore entity for each comment
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("name", name);
+    commentEntity.setProperty("email", email);
+    commentEntity.setProperty("text", text);
+    commentEntity.setProperty("timestamp", timestamp);
 
-    // Redirect user back to the same page
+    // Store entity in Datastore
+    datastore.put(commentEntity);
+
+    // Redirect user back to portfolio home page
     response.sendRedirect("/index.html");
   }
 
