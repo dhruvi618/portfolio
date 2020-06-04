@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  
+
   // Create Datastore instance to interact with the Datastore
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
@@ -48,8 +48,18 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     List<Comment> comments = new ArrayList<>();
+    int numberOfComments = getNumOfComments(request);
+    if (numberOfComments == -1) {
+      // Return empty JSON response
+      response.setContentType("application/json");
+      response.getWriter().println("");
+    }
+
+    int i = 0;
     for (Entity entity : results.asIterable()) {
-      
+      if (i == numberOfComments)
+        break;
+
       // Retrieve stored values from datastore
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
@@ -60,6 +70,8 @@ public class DataServlet extends HttpServlet {
       
       // Store comment in data structure
       comments.add(comment);
+
+      i++;
     }
 
     // Convert list of comments stored in the Datastore to JSON using Gson
@@ -103,5 +115,28 @@ public class DataServlet extends HttpServlet {
       return defaultValue;
     }
     return value;
+  }
+
+  /** Returns user selected number of comments, or -1 if the choice was invalid. */
+  private int getNumOfComments(HttpServletRequest request) {
+    // Retrieve number of comments selected by the user
+    String numOfCommentsString = request.getParameter("num-comments");
+
+    // Convert the number of comments to an int
+    int numOfComments;
+    try {
+      numOfComments = Integer.parseInt(numOfCommentsString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + numOfCommentsString);
+      return -1;
+    }
+
+    // Ensure that the number of comments is positive
+    if (numOfComments < 0) {
+      System.err.println("Number of comments must be positive: " + numOfCommentsString);
+      return -1;
+    }
+
+    return numOfComments;
   }
 }

@@ -34,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 1000;
 }
 
 #home a {
@@ -48,20 +49,17 @@
 
 #home h1 {
   font-size: 72px;
-  font-weight: 1000;
   padding-bottom: 15px;
   color: pink;
 }
 
 #home h2 {
   font-size: 56px;
-  font-weight: 1000;
   padding-bottom: 20px;
 }
 
 #home h3 {
   font-size: 48px;
-  font-weight: 1000;
 }
 
 #about {
@@ -70,6 +68,7 @@
   display: flex;
   padding: 100px;
   min-height: 75vh;
+  font-weight: 1000;
 }
 
 #about img {
@@ -81,18 +80,15 @@
 
 #about h2 {
   font-size: 50px;
-  font-weight: 1000;
   color: pink;
 }
 
 #about p {
   font-size: 18px;
-  font-weight: 1000;
 }
 
 #about button {
   font-size: 18px;
-  font-weight: 1000;
   background-color: salmon;
   display: inline-block;
   margin: 25px 0px 0px 0px;
@@ -181,7 +177,7 @@
 #contact {
   position: relative;
   padding: 100px;
-  min-height: 75vh;
+  min-height: 50vh;
 }
 
 #contact h2 {
@@ -205,4 +201,33 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
+}
+
+#form {
+  position: relative;
+  padding: 100px;
+  min-height: 75vh;
+  font-weight: 1000;
+}
+
+input[type=text], textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0px;
+  display: inline-block;
+  border: 1px solid pink;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  position: relative;
+  background-color: salmon;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+input[type=submit]:hover {
+  opacity: 80%;
 }
