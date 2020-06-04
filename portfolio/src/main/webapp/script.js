@@ -13,8 +13,8 @@
 // limitations under the License.
 
 function onWindowLoad() {
-  fetchCommentAndDisplay();
   changeProject();
+  fetchCommentAndDisplay(0);
 }
 
 const facts = [
@@ -55,19 +55,47 @@ function pauseProjectChange() {
   clearTimeout(changeCurrProj);
 }
 
-/** Fetches comment(s) and updates the UI to display */
-function fetchCommentAndDisplay() {
+/** Fetches comment(s) and updates the UI to display them */
+function fetchCommentAndDisplay(numOfCommentsToDisplay) {
   fetch('/data').then(response => response.json()).then((comments) => {
-    const commentsContainer = document.getElementById('comments-container');
-    comments.forEach((comment) => {
-      const currentCommentContainer = createDivElement();
-      currentCommentContainer.style.padding = "50px 0px";
-      commentsContainer.appendChild(currentCommentContainer);
-      currentCommentContainer.appendChild(createParagraphElement(comment.name));
-      currentCommentContainer.appendChild(createParagraphElement(comment.email));
-      currentCommentContainer.appendChild(createParagraphElement(comment.text));
-    });
+    /** 
+    * Error check to ensure the user did not select to display more comments than exist in the datastore
+    *
+    * UI is not updated on user selecting to view more comments than exist in the datastore
+    */ 
+    if (numOfCommentsToDisplay > comments.length) {
+      alert("The selected value is greater than the total number of comments.");
+    }
+    else {
+
+      // Clear out old comments before inserting new comments into the DOM
+      const commentsContainer = document.getElementById('comments-container');
+      commentsContainer.innerHTML = "";
+        
+      // Display selected number of comments on the page
+      var i = 0;
+      while (i < numOfCommentsToDisplay) {
+        let currentComment = comments[i];
+        const currentCommentContainer = createDivElement();
+        currentCommentContainer.style.padding = "50px 0px";
+        commentsContainer.appendChild(currentCommentContainer);
+        currentCommentContainer.appendChild(createParagraphElement(currentComment.name));
+        currentCommentContainer.appendChild(createParagraphElement(currentComment.email));
+        currentCommentContainer.appendChild(createParagraphElement(currentComment.text));
+        i++;
+      }
+    }
   });
+}
+
+function getNumCommentsSelectedAndDisplay() {
+  
+  // Retrieve number of comments selected by the user
+  const selectElement = document.getElementById('num-comments');
+  const numOfCommentsToDisplay = selectElement.options[selectElement.selectedIndex].value;
+
+  // Call to update UI
+  fetchCommentAndDisplay(numOfCommentsToDisplay);
 }
 
 /** Creates an <p> element containing text. */
@@ -80,4 +108,21 @@ function createParagraphElement(text) {
 /** Creates an <div> element containing comment object. */
 function createDivElement() {
   return document.createElement('div');
+}
+
+async function deleteCommentsAndUpdateDisplay() {
+  const response = await fetch("/delete-data", { method: 'POST' });
+  const jsonResponse = await response.json();
+
+  // Check if response is empty which signifies that the deletion was successful
+  if (jsonResponse === "") {
+
+    // Change selected option to 0 since the Datastore has been emptied
+    document.getElementById('num-comments').selectedIndex = 0;
+
+    fetchCommentAndDisplay(0);
+  }
+  else {
+    alert("Error deleting comments from datastore.");
+  }
 }

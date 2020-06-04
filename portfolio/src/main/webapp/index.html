@@ -95,8 +95,17 @@
       </div>
     </section>
     <section id="form">
+      <select id="num-comments" name="num-comments" onchange="getNumCommentsSelectedAndDisplay()">
+        <option hidden disabled selected value>Select number of comments to display</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>  
       <form action="/data" method="POST">
         <p>Please leave a comment!</p>
+        <br/><br/>
         <input type="text" id="name" name="name" placeholder="Your name here!"></input>
         <!-- TO DO: Remove break statement after styling and adding using CSS -->
         <br/><br/>
@@ -109,6 +118,7 @@
         <input type="submit"/>
       </form>
       <div id="comments-container"></div>
+      <button onclick="deleteCommentsAndUpdateDisplay()">Click to delete all comments</button>
     </section>
   </body>
 </html>

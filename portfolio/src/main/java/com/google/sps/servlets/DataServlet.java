@@ -36,13 +36,13 @@ import com.google.gson.Gson;
 /** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
   // Create Datastore instance to interact with the Datastore
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   /** Retrieves and outputs JSON based on all user comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
     // Create Query instance for Comment entities and sort by most recent comment first
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
@@ -106,5 +106,4 @@ public class DataServlet extends HttpServlet {
     }
     return value;
   }
-
 }
