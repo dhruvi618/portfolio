@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  
   // Create Datastore instance to interact with the Datastore
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 

@@ -110,6 +110,7 @@ function createDivElement() {
   return document.createElement('div');
 }
 
+/** Asynchronously fetch and post to servlet to delete all comment entries and update UI */
 async function deleteCommentsAndUpdateDisplay() {
   const response = await fetch("/delete-data", { method: 'POST' });
   const jsonResponse = await response.json();

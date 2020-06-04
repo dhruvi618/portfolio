@@ -49,7 +49,6 @@ public class DataDeleteServlet extends HttpServlet {
     // Iterate through each entity in the Datastore and delete it
     for (Entity entity : results.asIterable()) {
       datastore.delete(entity.getKey());
-      System.out.println("Deleted Entry: "+entity);
     }
 
     // Return empty JSON response
