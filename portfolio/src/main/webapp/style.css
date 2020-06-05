@@ -34,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 1000;
 }
 
 #home a {
@@ -48,20 +49,24 @@
 
 #home h1 {
   font-size: 72px;
-  font-weight: 1000;
   padding-bottom: 15px;
   color: pink;
 }
 
 #home h2 {
   font-size: 56px;
-  font-weight: 1000;
   padding-bottom: 20px;
 }
 
 #home h3 {
   font-size: 48px;
+}
+
+#contact h2, #form h2, #projects h2, #exp h2, #about h2 {
+  font-size: 50px;
   font-weight: 1000;
+  color: pink;
+  padding-bottom: 50px;
 }
 
 #about {
@@ -70,6 +75,7 @@
   display: flex;
   padding: 100px;
   min-height: 75vh;
+  font-weight: 1000;
 }
 
 #about img {
@@ -79,20 +85,12 @@
   margin-right: 50px;
 }
 
-#about h2 {
-  font-size: 50px;
-  font-weight: 1000;
-  color: pink;
-}
-
 #about p {
   font-size: 18px;
-  font-weight: 1000;
 }
 
 #about button {
   font-size: 18px;
-  font-weight: 1000;
   background-color: salmon;
   display: inline-block;
   margin: 25px 0px 0px 0px;
@@ -114,14 +112,6 @@
   height: auto;
   justify-content: center;
   align-items: center; 
-}
-
-#exp h2 {
-  font-size: 50px;
-  font-weight: 1000;
-  padding-right: 100px;
-  padding-bottom: 50px;
-  color: pink;
 }
 
 .experience {
@@ -165,30 +155,17 @@
   min-height: 70vh;
 }
 
-#projects h2 {
-  font-size: 50px;
-  font-weight: 1000;
-  color: pink;
-}
-
 #projects.myProj img {
-    padding: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #contact {
   position: relative;
   padding: 100px;
-  min-height: 75vh;
-}
-
-#contact h2 {
-  font-size: 50px;
-  font-weight: 1000;
-  color: pink;
-  padding-bottom: 50px;
+  min-height: 50vh;
 }
 
 #contact.contact-info {
@@ -205,4 +182,56 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
+}
+
+#form {
+  position: relative;
+  padding: 100px;
+  min-height: 75vh;
+  font-weight: 1000;
+}
+
+input[type=text], textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0px;
+  display: inline-block;
+  border: 1px solid pink;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  position: relative;
+  background-color: salmon;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+#form button {
+  font-size: 12px;
+  background-color: salmon;
+  display: inline-block;
+  padding: 8px;
+  margin-top: 25px;
+}
+
+input[type=submit]:hover, #form button:hover {
+  opacity: 80%;
+}
+
+select {
+  padding: 15px;
+}
+
+.select-dropdown {
+  padding-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+#form h6 {
+  padding: 20px 0px;
+  font-size: 20px;
 }

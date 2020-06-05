@@ -13,8 +13,8 @@
 // limitations under the License.
 
 function onWindowLoad() {
-  fetchCommentAndDisplay();
   changeProject();
+  fetchCommentAndDisplay(0);
 }
 
 const facts = [
@@ -55,10 +55,13 @@ function pauseProjectChange() {
   clearTimeout(changeCurrProj);
 }
 
-/** Fetches comment(s) and updates the UI to display */
-function fetchCommentAndDisplay() {
-  fetch('/data').then(response => response.json()).then((comments) => {
-    const commentsContainer = document.getElementById('comments-container');
+/** Fetches comment(s) and updates the UI to display them */
+function fetchCommentAndDisplay(numOfCommentsToDisplay) {
+  // Clear out old comments before inserting new comments into the DOM
+  const commentsContainer = document.getElementById('comments-container');
+  commentsContainer.innerHTML = "";
+
+  fetch('/data?num-comments=' + numOfCommentsToDisplay).then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       const currentCommentContainer = createDivElement();
       currentCommentContainer.style.padding = "50px 0px";
@@ -68,6 +71,15 @@ function fetchCommentAndDisplay() {
       currentCommentContainer.appendChild(createParagraphElement(comment.text));
     });
   });
+}
+
+function getNumCommentsSelectedAndDisplay() {
+  // Retrieve number of comments selected by the user
+  const selectElement = document.getElementById('num-comments');
+  const numOfCommentsToDisplay = selectElement.options[selectElement.selectedIndex].value;
+
+  // Call to update UI
+  fetchCommentAndDisplay(numOfCommentsToDisplay);
 }
 
 /** Creates an <p> element containing text. */
@@ -80,4 +92,21 @@ function createParagraphElement(text) {
 /** Creates an <div> element containing comment object. */
 function createDivElement() {
   return document.createElement('div');
+}
+
+/** Fetch and post to servlet to delete all comment entries and update UI */
+function deleteCommentsAndUpdateDisplay() {
+  fetch("/delete-data", { method: 'POST' }).then(function(response) {
+    // Check if response code is 200 which signifies that the deletion was successful
+    if (response.status === 200) {
+      // Change selected option to 0 since the Datastore has been emptied
+      document.getElementById('num-comments').selectedIndex = 0;
+      
+      // Update UI
+      fetchCommentAndDisplay(0);
+    } else {
+      // Notify user that comments could not be deleted
+      alert("Error deleting comments from datastore.");
+    }
+  });
 }
