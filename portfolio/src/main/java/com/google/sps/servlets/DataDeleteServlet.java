@@ -51,9 +51,8 @@ public class DataDeleteServlet extends HttpServlet {
       datastore.delete(entity.getKey());
     }
 
-    // Return empty JSON response
-    response.setContentType("application/json");
-    response.getWriter().println("");
+    // Return empty response
+    response.getWriter().println();
 
     // Redirect user back to portfolio home page
     response.sendRedirect("/index.html");

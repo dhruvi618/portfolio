@@ -94,20 +94,19 @@ function createDivElement() {
   return document.createElement('div');
 }
 
-/** Asynchronously fetch and post to servlet to delete all comment entries and update UI */
-async function deleteCommentsAndUpdateDisplay() {
-  const response = await fetch("/delete-data", { method: 'POST' });
-  const jsonResponse = await response.json();
-
-  // Check if response is empty which signifies that the deletion was successful
-  if (jsonResponse === "") {
-
-    // Change selected option to 0 since the Datastore has been emptied
-    document.getElementById('num-comments').selectedIndex = 0;
-
-    fetchCommentAndDisplay(0);
-  }
-  else {
-    alert("Error deleting comments from datastore.");
-  }
+/** Fetch and post to servlet to delete all comment entries and update UI */
+function deleteCommentsAndUpdateDisplay() {
+  fetch("/delete-data", { method: 'POST' }).then(function(response) {
+    // Check if response code is 200 which signifies that the deletion was successful
+    if (response.status === 200) {
+      // Change selected option to 0 since the Datastore has been emptied
+      document.getElementById('num-comments').selectedIndex = 0;
+      
+      // Update UI
+      fetchCommentAndDisplay(0);
+    } else {
+      // Notify user that comments could not be deleted
+      alert("Error deleting comments from datastore.");
+    }
+  });
 }
