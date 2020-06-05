@@ -52,7 +52,7 @@ public class DataServlet extends HttpServlet {
       response.getWriter().println("");
     }
 
-    // Contains a specifiec number of entities of type Comment in the Datastore 
+    // Contains a specific number of entities of type Comment in the Datastore 
     List<Entity> results = datastore.prepare(query)
         .asList(FetchOptions.Builder.withLimit(numberOfComments));
 
