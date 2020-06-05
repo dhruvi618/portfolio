@@ -96,6 +96,7 @@
     </section>
     <section id="form">
       <h2>Comments</h2>
+      <h6>Please leave a comment!</h6>
       <div id="select-dropdown">
         <select id="num-comments" name="num-comments" onchange="getNumCommentsSelectedAndDisplay()">
           <option hidden disabled selected value>Select number of comments to display</option>
@@ -107,7 +108,6 @@
         </select>
       </div>
       <form action="/data" method="POST">
-        <h6>Please leave a comment!</h6>
         <input type="text" id="name" name="name" placeholder="Your name here!"></input>
         <input type="text" id="email" name="email" placeholder="Your email here!"></input>
         <textarea name="text-input" placeholder="Insert comment here!"></textarea>
