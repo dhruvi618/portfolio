@@ -97,8 +97,8 @@ public class DataServlet extends HttpServlet {
     // Store entity in Datastore
     datastore.put(commentEntity);
 
-    // Redirect user back to portfolio home page
-    response.sendRedirect("/index.html");
+    // Redirect user back to portfolio home page form section
+    response.sendRedirect("/index.html#form");
   }
 
   /**
