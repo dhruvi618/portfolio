@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -44,10 +45,6 @@ public class DataServlet extends HttpServlet {
     // Create Query instance for Comment entities and sort by most recent comment first
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
-    // Contains all entities of type Comment in the Datastore 
-    PreparedQuery results = datastore.prepare(query);
-
-    List<Comment> comments = new ArrayList<>();
     int numberOfComments = getNumOfComments(request);
     if (numberOfComments == -1) {
       // Return empty JSON response
@@ -55,11 +52,12 @@ public class DataServlet extends HttpServlet {
       response.getWriter().println("");
     }
 
-    int i = 0;
-    for (Entity entity : results.asIterable()) {
-      if (i == numberOfComments)
-        break;
+    // Contains a specifiec number of entities of type Comment in the Datastore 
+    List<Entity> results = datastore.prepare(query)
+        .asList(FetchOptions.Builder.withLimit(numberOfComments));
 
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results) {
       // Retrieve stored values from datastore
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
@@ -70,8 +68,6 @@ public class DataServlet extends HttpServlet {
       
       // Store comment in data structure
       comments.add(comment);
-
-      i++;
     }
 
     // Convert list of comments stored in the Datastore to JSON using Gson

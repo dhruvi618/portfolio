@@ -61,7 +61,7 @@ function fetchCommentAndDisplay(numOfCommentsToDisplay) {
   const commentsContainer = document.getElementById('comments-container');
   commentsContainer.innerHTML = "";
 
-  fetch('/data?num-comments='+numOfCommentsToDisplay).then(response => response.json()).then((comments) => {
+  fetch('/data?num-comments=' + numOfCommentsToDisplay).then(response => response.json()).then((comments) => {
     comments.forEach((comment) => {
       const currentCommentContainer = createDivElement();
       currentCommentContainer.style.padding = "50px 0px";
