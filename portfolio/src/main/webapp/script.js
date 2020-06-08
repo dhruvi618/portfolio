@@ -60,20 +60,22 @@ google.charts.setOnLoadCallback(drawChart);
 
 /** Creates a chart and adds it to the page. */
 function drawChart() {
-  const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Programming Languages');
-  data.addColumn('number', 'Count');
-  data.addRows([
-    ['Java', 10],
-    ['JavaScript', 8],
-    ['Python', 15]
+  // Define data values for chart in format [Programming Language, Users]
+  var data = google.visualization.arrayToDataTable([
+    ['Programming Languages', 'Users'],
+    ['Java',  900],
+    ['JavaScript',  1000],
+    ['Python',  1170],
+    ['C/C++',  1250],
+    ['C#',  1530]
   ]);
 
+  // Define title and view options for the chart
   const options = {
     'title': 'Trending Programming Languages',
     'width':500,
     'height':500,
-    'backgroundColor': '#111',
+    backgroundColor: '#111',
     hAxis: {
       textStyle: {
         color: '#FFF'
@@ -94,8 +96,8 @@ function drawChart() {
     }
   };
 
-  const chart = new google.visualization.PieChart(
-    document.getElementById('chart-container'));
+  // Initialize and draw the bar chart
+  const chart = new google.visualization.BarChart(document.getElementById('chart-container'));
   chart.draw(data, options);
 }
 
