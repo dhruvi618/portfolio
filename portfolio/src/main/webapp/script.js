@@ -63,12 +63,14 @@ function drawChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Programming Languages');
   data.addColumn('number', 'Count');
+  // Add data to chart that is formatted using [Programming Language, User Count]
   data.addRows([
     ['Java', 10],
     ['JavaScript', 8],
     ['Python', 15]
   ]);
 
+  // Define title and view options for the chart
   const options = {
     'title': 'Trending Programming Languages',
     'width':500,
@@ -94,6 +96,7 @@ function drawChart() {
     }
   };
 
+  // Initialize and draw the pie chart
   const chart = new google.visualization.PieChart(
     document.getElementById('chart-container'));
   chart.draw(data, options);
