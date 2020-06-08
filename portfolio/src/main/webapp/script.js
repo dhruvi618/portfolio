@@ -63,11 +63,11 @@ function drawChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Programming Languages');
   data.addColumn('number', 'Count');
-        data.addRows([
-          ['Java', 10],
-          ['JavaScript', 8],
-          ['Python', 15]
-        ]);
+  data.addRows([
+    ['Java', 10],
+    ['JavaScript', 8],
+    ['Python', 15]
+  ]);
 
   const options = {
     'title': 'Trending Programming Languages',
