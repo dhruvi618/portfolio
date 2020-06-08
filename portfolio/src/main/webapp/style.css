@@ -232,3 +232,9 @@ select {
   padding: 20px 0px;
   font-size: 20px;
 }
+
+#charts {
+  position: relative;
+  padding: 100px;
+  min-height: 50vh;
+}
