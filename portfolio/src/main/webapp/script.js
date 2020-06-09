@@ -68,8 +68,7 @@ function drawChart() {
     ['Python',  1170],
     ['C/C++',  1250],
     ['C#',  1530]
-  ]);
-
+    
   // Define title and view options for the chart
   const options = {
     title: 'Trending Programming Languages',
