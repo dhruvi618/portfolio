@@ -15,6 +15,7 @@
 function onWindowLoad() {
   changeProject();
   fetchCommentAndDisplay(0);
+  getUserLoginStatus();
 }
 
 const facts = [
@@ -72,9 +73,9 @@ function drawChart() {
 
   // Define title and view options for the chart
   const options = {
-    'title': 'Trending Programming Languages',
-    'width':500,
-    'height':500,
+    title: 'Trending Programming Languages',
+    width: 500,
+    height: 500,
     backgroundColor: '#111',
     hAxis: {
       textStyle: {
@@ -153,6 +154,36 @@ function deleteCommentsAndUpdateDisplay() {
     } else {
       // Notify user that comments could not be deleted
       alert("Error deleting comments from datastore.");
+    }
+  });
+}
+
+function getUserLoginStatus() {
+  fetch('/login').then(response => response.json()).then((message) => {
+    // Get login status from JSON response
+    const loginStatus = message.loginStatus;
+
+    // Create link element and set its reference to the JSON response URL 
+    const linkElement = document.createElement('a');
+    const url = message.url;
+    linkElement.href = url;
+
+    // Create paragraph element and append link to it
+    const paragraphElement = createParagraphElement("Click to ");
+    paragraphElement.appendChild(linkElement);
+
+    // Get login container
+    const loginContainer = document.getElementById('login-container');
+
+    // Add login/logout link to page based on login status
+    if (loginStatus === true) {
+      // Set link element to logout and add to paragraph element
+      linkElement.innerText = "logout";
+      loginContainer.appendChild(paragraphElement);
+    } else {
+      // Set link element to login and add to paragraph element
+      linkElement.innerText = "login";
+      loginContainer.appendChild(paragraphElement);
     }
   });
 }
