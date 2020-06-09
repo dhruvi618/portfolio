@@ -30,47 +30,19 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    boolean loginStatus;
-    String userEmail;
-    String url;
-
     // Gets reference to a UserService
     UserService userService = UserServiceFactory.getUserService();
 
-    // Checks and modify behavior based on status of user log in 
-    if (userService.isUserLoggedIn()) {
-      // Set login status to true
-      loginStatus = true;
+    // Checks status of user login and creates corresponding URL
+    boolean loggedIn = userService.isUserLoggedIn();
+    String url = loggedIn ? userService.createLogoutURL("/") : userService.createLoginURL("/");
 
-      // Gets email of current user
-      userEmail = userService.getCurrentUser().getEmail();
-
-      // Set redirect URL to form section of portfolio page
-      String urlToRedirectToAfterUserLogsOut = "/";
-      
-      // Creates a logout URL
-      url = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-    } else {
-      // Set login status to false
-      loginStatus = false;
-
-      // Set email of current user to null since no user is logged in
-      userEmail = null;
-
-      // Set redirect URL
-      String urlToRedirectToAfterUserLogsIn = "/";
-
-      // Creates a login URL
-      url = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-    }
-    // Create login object based on current login status, email, and login url
-    Login login = new Login(loginStatus, userEmail, url);
-
-    // Set response type to JSON
-    response.setContentType("application/json");
-
-    // Create and send JSON response using Gson
+    // Create login object based on current login status and login url
+    Login login = new Login(loggedIn, url);
+    
+    // Create JSON response string using Gson and send JSON response
     String json = new Gson().toJson(login);
+    response.setContentType("application/json");
     response.getWriter().println(json);
   }
 }

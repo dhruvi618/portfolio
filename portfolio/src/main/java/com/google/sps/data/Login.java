@@ -15,19 +15,17 @@
 package com.google.sps.data;
 
 /**
- * Class representing login data, where each login contains a login status, email, and a url
+ * Class representing login data, where each login contains a login status and a url
  *
  * Note: The private variables in this class are converted into JSON.
  */
 public class Login {
 
   private boolean loginStatus;
-  private String email;
   private String url;
 
-  public Login(boolean loginStatus, String email, String url) {
+  public Login(boolean loginStatus, String url) {
     this.loginStatus = loginStatus;
-    this.email = email;
     this.url = url;
   }
 }

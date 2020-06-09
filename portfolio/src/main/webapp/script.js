@@ -146,9 +146,6 @@ function deleteCommentsAndUpdateDisplay() {
   fetch("/delete-data", { method: 'POST' }).then(function(response) {
     // Check if response code is 200 which signifies that the deletion was successful
     if (response.status === 200) {
-      // Change selected option to 0 since the Datastore has been emptied
-      document.getElementById('num-comments').selectedIndex = 0;
-      
       // Update UI
       fetchCommentAndDisplay(0);
     } else {
@@ -164,33 +161,16 @@ function getUserLoginStatus() {
     // Get login status from JSON response
     const loginStatus = message.loginStatus;
 
-    // Create link element and set its reference to the JSON response URL 
+    // Create link element to display login/logout URL to user
     const linkElement = document.createElement('a');
     const url = message.url;
     linkElement.href = url;
 
-    // Create paragraph element and append link to it
-    const paragraphElement = createParagraphElement("Click to ");
-    paragraphElement.appendChild(linkElement);
-
-    // Get login container
     const loginContainer = document.getElementById('login-container');
+    loginContainer.appendChild(linkElement);
 
-    // Add login/logout link to page based on login status
-    if (loginStatus === true) {
-      // Set link element to logout and add to paragraph element
-      linkElement.innerText = "logout";
-      loginContainer.appendChild(paragraphElement);
-
-      // Show comments if user is logged in
-      document.getElementById('comments-container').style.display = 'block'; 
-    } else {
-      // Set link element to login and add to paragraph element
-      linkElement.innerText = "login";
-      loginContainer.appendChild(paragraphElement);
-
-      // Hide comments if user is not logged in
-      document.getElementById('comments-container').style.display = 'none'; 
-    }
+    // Add login/logout link and show/hide comments based on login status
+    linkElement.innerText = loginStatus ? "Logout" : "Login";
+    document.getElementById('comments-container').style.display = loginStatus ? 'block' : 'none';
   });
 }
