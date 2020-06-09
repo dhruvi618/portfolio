@@ -102,9 +102,9 @@
     <section id="form">
       <h2>Comments</h2>
       <h6>Please leave a comment!</h6>
+      <div id="login-container"></div>
       <div id="select-dropdown">
         <select id="num-comments" name="num-comments" onchange="getNumCommentsSelectedAndDisplay()">
-          <option hidden disabled selected value>Select number of comments to display</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -119,7 +119,6 @@
         <input type="submit"/>
       </form>
       <div id="comments-container"></div>
-      <div id="login-container"></div>
       <button onclick="deleteCommentsAndUpdateDisplay()">Click to delete all comments</button>
     </section>
   </body>

@@ -14,7 +14,7 @@
 
 function onWindowLoad() {
   changeProject();
-  fetchCommentAndDisplay(0);
+  getNumCommentsSelectedAndDisplay();
   getUserLoginStatus();
 }
 
@@ -181,10 +181,16 @@ function getUserLoginStatus() {
       // Set link element to logout and add to paragraph element
       linkElement.innerText = "logout";
       loginContainer.appendChild(paragraphElement);
+
+      // Show comments if user is logged in
+      document.getElementById('comments-container').style.display = 'block'; 
     } else {
       // Set link element to login and add to paragraph element
       linkElement.innerText = "login";
       loginContainer.appendChild(paragraphElement);
+
+      // Hide comments if user is not logged in
+      document.getElementById('comments-container').style.display = 'none'; 
     }
   });
 }
