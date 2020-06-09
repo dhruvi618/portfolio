@@ -55,6 +55,53 @@ function pauseProjectChange() {
   clearTimeout(changeCurrProj);
 }
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Creates a chart and adds it to the page. */
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Programming Languages');
+  data.addColumn('number', 'Count');
+  // Add data to chart that is formatted using [Programming Language, User Count]
+  data.addRows([
+    ['Java', 10],
+    ['JavaScript', 8],
+    ['Python', 15]
+  ]);
+
+  // Define title and view options for the chart
+  const options = {
+    'title': 'Trending Programming Languages',
+    'width':500,
+    'height':500,
+    'backgroundColor': '#111',
+    hAxis: {
+      textStyle: {
+        color: '#FFF'
+      }
+    },
+    vAxis: {
+      textStyle: {
+        color: '#ffffff'
+      }
+    },
+    legend: {
+      textStyle: {
+        color: '#ffffff'
+      }
+    },
+    titleTextStyle: {
+      color: '#ffffff'
+    }
+  };
+
+  // Initialize and draw the pie chart
+  const chart = new google.visualization.PieChart(
+    document.getElementById('chart-container'));
+  chart.draw(data, options);
+}
+
 /** Fetches comment(s) and updates the UI to display them */
 function fetchCommentAndDisplay(numOfCommentsToDisplay) {
   // Clear out old comments before inserting new comments into the DOM
