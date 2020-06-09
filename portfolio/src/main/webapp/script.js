@@ -158,6 +158,7 @@ function deleteCommentsAndUpdateDisplay() {
   });
 }
 
+/** Get login status of the user */
 function getUserLoginStatus() {
   fetch('/login').then(response => response.json()).then((message) => {
     // Get login status from JSON response

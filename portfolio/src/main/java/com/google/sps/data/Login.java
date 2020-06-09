@@ -28,6 +28,6 @@ public class Login {
   public Login(boolean loginStatus, String email, String url) {
     this.loginStatus = loginStatus;
     this.email = email;
-    this. url = url;
+    this.url = url;
   }
 }
