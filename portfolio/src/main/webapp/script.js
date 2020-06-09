@@ -72,9 +72,9 @@ function drawChart() {
 
   // Define title and view options for the chart
   const options = {
-    'title': 'Trending Programming Languages',
-    'width':500,
-    'height':500,
+    title: 'Trending Programming Languages',
+    width: 500,
+    height: 500,
     backgroundColor: '#111',
     hAxis: {
       textStyle: {
