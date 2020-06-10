@@ -45,23 +45,23 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String startDateString = String.valueOf(cells[1]);
       String endDateString = String.valueOf(cells[2]);
 
+      // Parse start date entry from CSV file and create corresponding Date
       String[] startDateComponents = startDateString.split("/");
       int startMonth = Integer.parseInt(startDateComponents[0]);
       int startDay = Integer.parseInt(startDateComponents[1]);
       int startYear = Integer.parseInt(startDateComponents[2]);
-      System.out.println(startMonth + " " + startDay + " " + startYear);
       Date startDate = new Date(startYear - 1900, startMonth - 1, startDay);
 
+      // Parse end date entry from CSV file and create corresponding Date
       String[] endDateComponents = endDateString.split("/");
       int endMonth = Integer.parseInt(endDateComponents[0]);
       int endDay = Integer.parseInt(endDateComponents[1]);
       int endYear = Integer.parseInt(endDateComponents[2]);
-      System.out.println(endMonth + " " + endDay + " " + endYear);
       Date endDate = new Date(endYear - 1900, endMonth - 1, endDay);
 
-      ProgrammingExperience programmingExperience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
+      ProgrammingExperience experience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
 
-      programmingExperiences.add(programmingExperience);
+      programmingExperiences.add(experience);
     }
     scanner.close();
   }
@@ -70,7 +70,6 @@ public class ProgrammingExperienceServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
     String json = new Gson().toJson(programmingExperiences);
-    System.out.println("JSON String: " + json);
     response.getWriter().println(json);
   }
 }

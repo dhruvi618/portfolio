@@ -62,7 +62,6 @@ google.charts.setOnLoadCallback(drawChart);
 /** Fetches programming experience data and draws chart. */
 function drawChart() {
   fetch('/programming-data').then(response => response.json()).then((programmingData) => {
-    
     const data = new google.visualization.DataTable();
     data.addColumn({ type: 'string', id: 'Programming Language' });
     data.addColumn({ type: 'date', id: 'Start' });
@@ -70,20 +69,20 @@ function drawChart() {
 
     const rowData = [];
 
+    // Parse fetched data and add each element to array to match format accepted by DataTable
     programmingData.forEach((programmingEntry) => {
-      rowData.push([programmingEntry.programmingLanguage, new Date(programmingEntry.startDate), new Date(programmingEntry.endDate)]);
+      rowData.push([programmingEntry.programmingLanguage, new Date(programmingEntry.startDate),
+          new Date(programmingEntry.endDate)]);
     });
-
     data.addRows(rowData);
 
+    // Initialize and draw the timeline chart based on view options
+    const chart = new google.visualization.Timeline(document.getElementById('chart-container'));
     const options = {
       title: 'Programing Language Experiences',
       width: '100%', 
-      height: '100%'
+      height: '100%',
     };
-
-    // Initialize and draw the timeline chart
-    const chart = new google.visualization.Timeline(document.getElementById('chart-container'));
     chart.draw(data, options);
   });
 }

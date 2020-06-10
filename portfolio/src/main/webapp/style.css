@@ -3,8 +3,6 @@
   padding:0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  background-color: #111;
-  color: white;
 }
 
 .navbar {
@@ -45,6 +43,7 @@
   margin: 25px 0px 0px 0px;
   padding: 10px;
   border-radius: 5px;
+  color: white;
 }
 
 #home h1 {
@@ -95,6 +94,7 @@
   display: inline-block;
   margin: 25px 0px 0px 0px;
   padding: 10px;
+  color: white;
 }
 
 #fact-container {
@@ -128,7 +128,6 @@
   font-size: 24px;
   font-weight: 1000;
   text-align: center;
-  color: white;
   padding-top: 5px;
 }
 
@@ -136,7 +135,6 @@
   font-size: 18px;
   font-weight: 900;
   text-align: center;
-  color: white;
   padding-top: 5px;
 }
 
@@ -152,7 +150,7 @@
 
 #projects {
   padding: 0 100px 0px 100px;
-  min-height: 70vh;
+  min-height: 50vh;
 }
 
 #projects.myProj img {
@@ -206,6 +204,7 @@ input[type=submit] {
   display: inline-block;
   padding: 10px 20px;
   border: none;
+  color: white;
 }
 
 #form button {
@@ -214,6 +213,7 @@ input[type=submit] {
   padding: 8px;
   margin-top: 25px;
   border: none;
+  color: white;
 }
 
 input[type=submit]:hover, #form button:hover {
