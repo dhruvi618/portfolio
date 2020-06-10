@@ -163,8 +163,7 @@ function getUserLoginStatus() {
 
     // Create link element to display login/logout URL to user
     const linkElement = document.createElement('a');
-    const url = message.url;
-    linkElement.href = url;
+    linkElement.href = message.url;
 
     const loginContainer = document.getElementById('login-container');
     loginContainer.appendChild(linkElement);
