@@ -35,6 +35,7 @@ public class ProgrammingExperienceServlet extends HttpServlet {
 
   private List<ProgrammingExperience> programmingExperiences = new ArrayList<>();
 
+  // Parse CSV file data and compute list of programming experience. On error, stop parsing and return to caller
   @Override
   public void init() {
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream(

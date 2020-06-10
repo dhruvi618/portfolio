@@ -59,7 +59,10 @@ function pauseProjectChange() {
 google.charts.load('current', {'packages':['timeline']});
 google.charts.setOnLoadCallback(drawChart);
 
-/** Fetches programming experience data and draws chart. */
+/** 
+ * Fetches programming experience data and draws chart. 
+ * In the case of incorrectly formatted data, display error to user
+ */
 function drawChart() {
   fetch('/programming-data').then(response => response.json()).then((programmingData) => {
     const data = new google.visualization.DataTable();
