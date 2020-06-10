@@ -14,7 +14,8 @@
 
 function onWindowLoad() {
   changeProject();
-  fetchCommentAndDisplay(0);
+  getNumCommentsSelectedAndDisplay();
+  getUserLoginStatus();
 }
 
 const facts = [
@@ -144,14 +145,30 @@ function deleteCommentsAndUpdateDisplay() {
   fetch("/delete-data", { method: 'POST' }).then(function(response) {
     // Check if response code is 200 which signifies that the deletion was successful
     if (response.status === 200) {
-      // Change selected option to 0 since the Datastore has been emptied
-      document.getElementById('num-comments').selectedIndex = 0;
-      
       // Update UI
       fetchCommentAndDisplay(0);
     } else {
       // Notify user that comments could not be deleted
       alert("Error deleting comments from datastore.");
     }
+  });
+}
+
+/** Get login status of the user */
+function getUserLoginStatus() {
+  fetch('/login').then(response => response.json()).then((message) => {
+    // Get login status from JSON response
+    const loginStatus = message.loginStatus;
+
+    // Create link element to display login/logout URL to user
+    const linkElement = document.createElement('a');
+    linkElement.href = message.url;
+
+    const loginContainer = document.getElementById('login-container');
+    loginContainer.appendChild(linkElement);
+
+    // Add login/logout link and show/hide comments based on login status
+    linkElement.innerText = loginStatus ? "Logout" : "Login";
+    document.getElementById('comments-container').style.display = loginStatus ? 'block' : 'none';
   });
 }
