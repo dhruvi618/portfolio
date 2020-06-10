@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/programming-data")
 public class ProgrammingExperienceServlet extends HttpServlet {
 
-  private List<ProgrammingExperience> programmingExperience = new ArrayList<>();
+  private List<ProgrammingExperience> programmingExperiences = new ArrayList<>();
 
   @Override
   public void init() {
@@ -46,20 +46,22 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String endDateString = String.valueOf(cells[2]);
 
       String[] startDateComponents = startDateString.split("/");
-      int startMonth = Integer.parseInt(startDateComponents[0]) - 1;
+      int startMonth = Integer.parseInt(startDateComponents[0]);
       int startDay = Integer.parseInt(startDateComponents[1]);
       int startYear = Integer.parseInt(startDateComponents[2]);
-      Date startDate = new Date(startYear, startMonth, startDay);
+      System.out.println(startMonth + " " + startDay + " " + startYear);
+      Date startDate = new Date(startYear - 1900, startMonth - 1, startDay);
 
       String[] endDateComponents = endDateString.split("/");
-      int endMonth = Integer.parseInt(endDateComponents[0]) - 1;
+      int endMonth = Integer.parseInt(endDateComponents[0]);
       int endDay = Integer.parseInt(endDateComponents[1]);
       int endYear = Integer.parseInt(endDateComponents[2]);
-      Date endDate = new Date(endYear, endMonth, endDay);
+      System.out.println(endMonth + " " + endDay + " " + endYear);
+      Date endDate = new Date(endYear - 1900, endMonth - 1, endDay);
 
       ProgrammingExperience programmingExperience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
 
-      programmingExperience.add(programmingExperience);
+      programmingExperiences.add(programmingExperience);
     }
     scanner.close();
   }
@@ -67,8 +69,8 @@ public class ProgrammingExperienceServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    Gson gson = new Gson();
-    String json = gson.toJson(programmingExperience);
+    String json = new Gson().toJson(programmingExperiences);
+    System.out.println("JSON String: " + json);
     response.getWriter().println(json);
   }
 }
