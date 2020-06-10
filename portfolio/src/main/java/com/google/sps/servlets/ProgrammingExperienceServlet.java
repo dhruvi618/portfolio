@@ -48,10 +48,12 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String endDateString = String.valueOf(cells[2]);
 
       // Parse dates using mm/dd/yyyy pattern and create corresponding Date objects
+      Date startDate = new Date();
+      Date endDate = new Date();
       SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
       try {  
-        Date startDate = formatter.parse(startDateString);
-        Date endDate = formatter.parse(endDateString);
+        startDate = formatter.parse(startDateString);
+        endDate = formatter.parse(endDateString);
       } catch (ParseException e) {e.printStackTrace();}
 
       ProgrammingExperience experience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
