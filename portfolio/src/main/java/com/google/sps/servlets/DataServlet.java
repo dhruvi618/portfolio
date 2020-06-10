@@ -21,6 +21,9 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
@@ -41,7 +44,6 @@ public class DataServlet extends HttpServlet {
   /** Retrieves and outputs JSON based on all user comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
     // Create Query instance for Comment entities and sort by most recent comment first
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
@@ -62,9 +64,10 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
       String text = (String) entity.getProperty("text");
+      float score = (float) entity.getProperty("score");
 
       // Create comment object with the inputted values in each field
-      Comment comment = new Comment(name, email, text);
+      Comment comment = new Comment(name, email, text, score);
       
       // Store comment in data structure
       comments.add(comment);
@@ -87,12 +90,20 @@ public class DataServlet extends HttpServlet {
     // Get timestamp of when comment was submitted for sorting purposes
     long timestamp = System.currentTimeMillis();
 
+    // Calculate sentiment score of user-inputted comment
+    Document doc = Document.newBuilder().setContent(text).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    float score = sentiment.getScore();
+    languageService.close();
+
     // Create datastore entity for each comment
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("text", text);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("score", score);
 
     // Store entity in Datastore
     datastore.put(commentEntity);

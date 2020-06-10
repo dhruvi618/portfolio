@@ -24,10 +24,12 @@ public class Comment {
   private String name;
   private String email;
   private String text;
+  private float score;
 
-  public Comment(String name, String email, String text) {
+  public Comment(String name, String email, String text, float score) {
     this.name = name;
     this.email = email;
-    this. text = text;
+    this.text = text;
+    this.score = score;
   }
 }

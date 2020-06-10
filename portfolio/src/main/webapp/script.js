@@ -103,6 +103,7 @@ function fetchCommentAndDisplay(numOfCommentsToDisplay) {
       currentCommentContainer.appendChild(createParagraphElement(comment.name));
       currentCommentContainer.appendChild(createParagraphElement(comment.email));
       currentCommentContainer.appendChild(createParagraphElement(comment.text));
+      currentCommentContainer.appendChild(createParagraphElement(comment.score));
     });
   });
 }
