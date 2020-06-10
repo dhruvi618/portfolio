@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 import com.google.sps.data.ProgrammingExperience;
 import java.io.IOException;
 import java.lang.Integer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,22 +47,14 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String startDateString = String.valueOf(cells[1]);
       String endDateString = String.valueOf(cells[2]);
 
-      // Parse start date entry from CSV file and create corresponding Date
-      String[] startDateComponents = startDateString.split("/");
-      int startMonth = Integer.parseInt(startDateComponents[0]);
-      int startDay = Integer.parseInt(startDateComponents[1]);
-      int startYear = Integer.parseInt(startDateComponents[2]);
-      Date startDate = new Date(startYear - 1900, startMonth - 1, startDay);
-
-      // Parse end date entry from CSV file and create corresponding Date
-      String[] endDateComponents = endDateString.split("/");
-      int endMonth = Integer.parseInt(endDateComponents[0]);
-      int endDay = Integer.parseInt(endDateComponents[1]);
-      int endYear = Integer.parseInt(endDateComponents[2]);
-      Date endDate = new Date(endYear - 1900, endMonth - 1, endDay);
+      // Parse dates using mm/dd/yyyy pattern and create corresponding Date objects
+      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+      try {  
+        Date startDate = formatter.parse(startDateString);
+        Date endDate = formatter.parse(endDateString);
+      } catch (ParseException e) {e.printStackTrace();}
 
       ProgrammingExperience experience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
-
       programmingExperiences.add(experience);
     }
     scanner.close();

@@ -67,9 +67,8 @@ function drawChart() {
     data.addColumn({ type: 'date', id: 'Start' });
     data.addColumn({ type: 'date', id: 'End' });
 
+    // Parse fetched data and add entry of format ["Programming Language", "Start Date", "End Date"] to array
     const rowData = [];
-
-    // Parse fetched data and add each element to array to match format accepted by DataTable
     programmingData.forEach((programmingEntry) => {
       rowData.push([programmingEntry.programmingLanguage, new Date(programmingEntry.startDate),
           new Date(programmingEntry.endDate)]);
