@@ -64,7 +64,7 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
       String text = (String) entity.getProperty("text");
-      float score = (float) entity.getProperty("score");
+      double score = (double) entity.getProperty("score");
 
       // Create comment object with the inputted values in each field
       Comment comment = new Comment(name, email, text, score);

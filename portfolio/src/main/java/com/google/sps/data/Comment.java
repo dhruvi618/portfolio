@@ -24,9 +24,9 @@ public class Comment {
   private String name;
   private String email;
   private String text;
-  private float score;
+  private double score;
 
-  public Comment(String name, String email, String text, float score) {
+  public Comment(String name, String email, String text, double score) {
     this.name = name;
     this.email = email;
     this.text = text;
