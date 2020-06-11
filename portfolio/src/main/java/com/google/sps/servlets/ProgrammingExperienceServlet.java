@@ -34,13 +34,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ProgrammingExperienceServlet extends HttpServlet {
 
   private List<ProgrammingExperience> programmingExperiences = new ArrayList<>();
-  boolean parseError = false;
+  boolean programmingLanguageExperienceParseError = false;
 
   // Parse CSV file data and compute list of programming experience. On error, stop parsing and return to caller
   @Override
   public void init() {
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream(
         "/WEB-INF/programming-language-experience.csv"));
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    formatter.setLenient(false);
+
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
@@ -50,8 +53,6 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String endDateString = String.valueOf(cells[2]);
 
       // Parse dates using mm/dd/yyyy pattern and create corresponding Date objects
-      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-      formatter.setLenient(false);
       try {  
         Date startDate = formatter.parse(startDateString);
         Date endDate = formatter.parse(endDateString);
@@ -59,7 +60,7 @@ public class ProgrammingExperienceServlet extends HttpServlet {
         programmingExperiences.add(experience);
       } catch (ParseException e) {
         e.printStackTrace();
-        parseError = true;
+        programmingLanguageExperienceParseError = true;
         break;
       }
     }
@@ -69,8 +70,8 @@ public class ProgrammingExperienceServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Send error code 500 in event of parsing exception and programming experiences JSON on success
-    if (parseError) {
-      response.setStatus(500);
+    if (programmingLanguageExperienceParseError) {
+      response.sendError(500,"Error parsing chart data");
     } else {
       response.setContentType("application/json");
       String json = new Gson().toJson(programmingExperiences);

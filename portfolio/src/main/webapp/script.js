@@ -67,7 +67,9 @@ function drawChart() {
   fetch('/programming-data').then(function(response) {
     const chartContainer = document.getElementById('chart-container');
     if (response.status === 500) {
-      chartContainer.appendChild(createParagraphElement("Error parsing chart data"));
+      const paragraphElement = response.message ? createParagraphElement(response.message)
+          : createParagraphElement("Error fetching chart data");
+      chartContainer.appendChild(paragraphElement);
     } else {
       response.json().then(function(programmingData) {
         const data = new google.visualization.DataTable();
