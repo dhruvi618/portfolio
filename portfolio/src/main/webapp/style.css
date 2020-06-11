@@ -3,8 +3,7 @@
   padding:0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  background-color: #111;
-  color: white;
+  color: #111;
 }
 
 .navbar {
@@ -18,7 +17,7 @@
   padding: 15px;
   text-decoration: none;
   color: rgb(224, 46, 106);
-  font-weight: 900;
+  font-weight: 1000;
   font-size: 24px;
 }
 
@@ -34,7 +33,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 1000;
 }
 
 #home a {
@@ -45,21 +43,26 @@
   margin: 25px 0px 0px 0px;
   padding: 10px;
   border-radius: 5px;
+  color: white;
+  font-weight: 1000;
 }
 
 #home h1 {
   font-size: 72px;
   padding-bottom: 15px;
-  color: pink;
+  color: rgb(224, 46, 106);
+  font-weight: 1000;
 }
 
 #home h2 {
   font-size: 56px;
   padding-bottom: 20px;
+  font-weight: 1000;
 }
 
 #home h3 {
   font-size: 48px;
+  font-weight: 1000;
 }
 
 #contact h2, #form h2, #projects h2, #exp h2, #about h2 {
@@ -95,6 +98,7 @@
   display: inline-block;
   margin: 25px 0px 0px 0px;
   padding: 10px;
+  color: white;
 }
 
 #fact-container {
@@ -128,7 +132,6 @@
   font-size: 24px;
   font-weight: 1000;
   text-align: center;
-  color: white;
   padding-top: 5px;
 }
 
@@ -136,7 +139,6 @@
   font-size: 18px;
   font-weight: 900;
   text-align: center;
-  color: white;
   padding-top: 5px;
 }
 
@@ -152,7 +154,7 @@
 
 #projects {
   padding: 0 100px 0px 100px;
-  min-height: 70vh;
+  min-height: 50vh;
 }
 
 #projects.myProj img {
@@ -206,6 +208,7 @@ input[type=submit] {
   display: inline-block;
   padding: 10px 20px;
   border: none;
+  color: white;
 }
 
 #form button {
@@ -214,6 +217,7 @@ input[type=submit] {
   padding: 8px;
   margin-top: 25px;
   border: none;
+  color: white;
 }
 
 input[type=submit]:hover, #form button:hover {
