@@ -71,7 +71,7 @@ public class ProgrammingExperienceServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Send error code 500 in event of parsing exception and programming experiences JSON on success
     if (programmingLanguageExperienceParseError) {
-      response.sendError(500,"Error parsing chart data");
+      response.sendError(500, "Error parsing chart data");
     } else {
       response.setContentType("application/json");
       String json = new Gson().toJson(programmingExperiences);
