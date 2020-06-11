@@ -34,12 +34,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ProgrammingExperienceServlet extends HttpServlet {
 
   private List<ProgrammingExperience> programmingExperiences = new ArrayList<>();
+  boolean programmingLanguageExperienceParseError = false;
 
   // Parse CSV file data and compute list of programming experience. On error, stop parsing and return to caller
   @Override
   public void init() {
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream(
         "/WEB-INF/programming-language-experience.csv"));
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    formatter.setLenient(false);
+
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
@@ -49,21 +53,29 @@ public class ProgrammingExperienceServlet extends HttpServlet {
       String endDateString = String.valueOf(cells[2]);
 
       // Parse dates using mm/dd/yyyy pattern and create corresponding Date objects
-      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
       try {  
         Date startDate = formatter.parse(startDateString);
         Date endDate = formatter.parse(endDateString);
         ProgrammingExperience experience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
         programmingExperiences.add(experience);
-      } catch (ParseException e) {break;}
+      } catch (ParseException e) {
+        e.printStackTrace();
+        programmingLanguageExperienceParseError = true;
+        break;
+      }
     }
     scanner.close();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json");
-    String json = new Gson().toJson(programmingExperiences);
-    response.getWriter().println(json);
+    // Send error code 500 in event of parsing exception and programming experiences JSON on success
+    if (programmingLanguageExperienceParseError) {
+      response.sendError(500, "Error parsing chart data");
+    } else {
+      response.setContentType("application/json");
+      String json = new Gson().toJson(programmingExperiences);
+      response.getWriter().println(json);
+    } 
   }
 }
