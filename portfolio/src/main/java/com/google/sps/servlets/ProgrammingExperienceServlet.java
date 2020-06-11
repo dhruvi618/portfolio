@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProgrammingExperienceServlet extends HttpServlet {
 
   private List<ProgrammingExperience> programmingExperiences = new ArrayList<>();
+  boolean parseError = false;
 
   // Parse CSV file data and compute list of programming experience. On error, stop parsing and return to caller
   @Override
@@ -50,20 +51,30 @@ public class ProgrammingExperienceServlet extends HttpServlet {
 
       // Parse dates using mm/dd/yyyy pattern and create corresponding Date objects
       SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+      formatter.setLenient(false);
       try {  
         Date startDate = formatter.parse(startDateString);
         Date endDate = formatter.parse(endDateString);
         ProgrammingExperience experience = new ProgrammingExperience(programmingLanguage, startDate, endDate);
         programmingExperiences.add(experience);
-      } catch (ParseException e) {break;}
+      } catch (ParseException e) {
+        e.printStackTrace();
+        parseError = true;
+        break;
+      }
     }
     scanner.close();
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json");
-    String json = new Gson().toJson(programmingExperiences);
-    response.getWriter().println(json);
+    // Send error code 500 in event of parsing exception and programming experiences JSON on success
+    if (parseError) {
+      response.setStatus(500);
+    } else {
+      response.setContentType("application/json");
+      String json = new Gson().toJson(programmingExperiences);
+      response.getWriter().println(json);
+    } 
   }
 }

@@ -64,28 +64,35 @@ google.charts.setOnLoadCallback(drawChart);
  * In the case of incorrectly formatted data, display error to user
  */
 function drawChart() {
-  fetch('/programming-data').then(response => response.json()).then((programmingData) => {
-    const data = new google.visualization.DataTable();
-    data.addColumn({ type: 'string', id: 'Programming Language' });
-    data.addColumn({ type: 'date', id: 'Start' });
-    data.addColumn({ type: 'date', id: 'End' });
+  fetch('/programming-data').then(function(response) {
+    const chartContainer = document.getElementById('chart-container');
+    if (response.status === 500) {
+      chartContainer.appendChild(createParagraphElement("Error parsing chart data"));
+    } else {
+      response.json().then(function(programmingData) {
+        const data = new google.visualization.DataTable();
+        data.addColumn({ type: 'string', id: 'Programming Language' });
+        data.addColumn({ type: 'date', id: 'Start' });
+        data.addColumn({ type: 'date', id: 'End' });
 
-    // Parse fetched data and add entry of format ["Programming Language", "Start Date", "End Date"] to array
-    const rowData = [];
-    programmingData.forEach((programmingEntry) => {
-      rowData.push([programmingEntry.programmingLanguage, new Date(programmingEntry.startDate),
-          new Date(programmingEntry.endDate)]);
-    });
-    data.addRows(rowData);
+        // Parse fetched data and add entry of format ["Programming Language", "Start Date", "End Date"] to array
+        const rowData = [];
+        programmingData.forEach((programmingEntry) => {
+          rowData.push([programmingEntry.programmingLanguage, new Date(programmingEntry.startDate),
+              new Date(programmingEntry.endDate)]);
+        });
+        data.addRows(rowData);
 
-    // Initialize and draw the timeline chart based on view options
-    const chart = new google.visualization.Timeline(document.getElementById('chart-container'));
-    const options = {
-      title: 'Programing Language Experiences',
-      width: '100%', 
-      height: '100%',
-    };
-    chart.draw(data, options);
+        // Initialize and draw the timeline chart based on view options
+        const chart = new google.visualization.Timeline(chartContainer);
+        const options = {
+          title: 'Programing Language Experiences',
+          width: '100%', 
+          height: '100%',
+        };
+        chart.draw(data, options);
+      });
+    }
   });
 }
 
