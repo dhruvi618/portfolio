@@ -94,7 +94,7 @@ public class DataServlet extends HttpServlet {
     Document doc = Document.newBuilder().setContent(text).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    float score = sentiment.getScore();
+    double score = (double) sentiment.getScore();
     languageService.close();
 
     // Create datastore entity for each comment
