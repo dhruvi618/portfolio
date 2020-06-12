@@ -110,6 +110,9 @@ function fetchCommentAndDisplay(numOfCommentsToDisplay) {
       currentCommentContainer.appendChild(createParagraphElement(comment.name));
       currentCommentContainer.appendChild(createParagraphElement(comment.email));
       currentCommentContainer.appendChild(createParagraphElement(comment.text));
+      const imgElement = comment.score < 0.0 ? createImgElement("images/negative.png")
+          : createImgElement("images/positive.png");
+      currentCommentContainer.appendChild(imgElement);
     });
   });
 }
@@ -130,9 +133,18 @@ function createParagraphElement(text) {
   return paragraphElement;
 }
 
-/** Creates an <div> element containing comment object. */
+/** Creates a <div> element containing comment object. */
 function createDivElement() {
   return document.createElement('div');
+}
+/** Creates a rounded 50x50 <img> element containing an image. */
+function createImgElement(src) {
+  const imgElement = document.createElement('img');
+  imgElement.src = src;
+  imgElement.style.width = "25px";
+  imgElement.style.height = "25px";
+  imgElement.style.borderRadius = "50%";
+  return imgElement;
 }
 
 /** Fetch and post to servlet to delete all comment entries and update UI */
