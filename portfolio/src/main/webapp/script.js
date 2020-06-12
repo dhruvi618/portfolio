@@ -88,9 +88,7 @@ function drawChart() {
         // Initialize and draw the timeline chart based on view options
         const chart = new google.visualization.Timeline(chartContainer);
         const options = {
-          title: 'Programing Language Experiences',
-          width: '100%', 
-          height: '100%',
+          height: 500
         };
         chart.draw(data, options);
       });
