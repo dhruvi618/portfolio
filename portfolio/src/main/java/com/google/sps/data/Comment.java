@@ -24,10 +24,16 @@ public class Comment {
   private String name;
   private String email;
   private String text;
+  
+  /** 
+   * Sentiment score between -1.0 (negative sentiment) and 1.0 (positive sentiment)
+   */
+  private double score;
 
-  public Comment(String name, String email, String text) {
+  public Comment(String name, String email, String text, double score) {
     this.name = name;
     this.email = email;
-    this. text = text;
+    this.text = text;
+    this.score = score;
   }
 }
