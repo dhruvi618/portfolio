@@ -23,6 +23,11 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> requiredAttendees = request.getAttendees();
     long meetingDuration = request.getDuration();
+    List<TimeRange> meetingQueryOptions = new ArrayList<>();
+
+    if (meetingDuration > TimeRange.WHOLE_DAY.duration() || meetingDuration <= 0) {
+      return meetingQueryOptions;
+    }
     
     List<TimeRange> eventsSortedByStartTime = new ArrayList<>();
     List<TimeRange> eventsSortedByEndTime = new ArrayList<>();
@@ -37,31 +42,30 @@ public final class FindMeetingQuery {
     Collections.sort(eventsSortedByStartTime, TimeRange.ORDER_BY_START);
     Collections.sort(eventsSortedByEndTime, TimeRange.ORDER_BY_END);
 
-    List<TimeRange> meetingQueryOptions = new ArrayList<>();
-
-    if (meetingDuration > TimeRange.WHOLE_DAY.duration())
-      return meetingQueryOptions;
-    else if(requiredAttendees.isEmpty() || eventsSortedByStartTime.isEmpty())
+    if (requiredAttendees.isEmpty() || eventsSortedByStartTime.isEmpty()) {
       meetingQueryOptions.add(TimeRange.WHOLE_DAY);
-    else {
+    } else {
       int numberOfEvents = eventsSortedByStartTime.size();
       int firstEventStartTime = eventsSortedByStartTime.get(0).start();
       int lastEventEndTime = eventsSortedByEndTime.get(numberOfEvents - 1).end();
 
-      if (firstEventStartTime - TimeRange.START_OF_DAY >= meetingDuration)
+      if (firstEventStartTime - TimeRange.START_OF_DAY >= meetingDuration) {
         meetingQueryOptions.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, firstEventStartTime, false));
+      }
 
       if (numberOfEvents > 1) {
         for (int currentEventIndex = 0; currentEventIndex < numberOfEvents - 1; currentEventIndex++) {
           int currentEventEndTime = eventsSortedByStartTime.get(currentEventIndex).end();
           int nextEventStartTime = eventsSortedByStartTime.get(currentEventIndex+1).start();
-          if (currentEventEndTime < nextEventStartTime && nextEventStartTime - currentEventEndTime >= meetingDuration)
-            meetingQueryOptions.add(TimeRange.fromStartEnd(currentEventEndTime, nextEventStartTime, false));
+          if (currentEventEndTime < nextEventStartTime && nextEventStartTime - currentEventEndTime >= meetingDuration) {
+            meetingQueryOptions.add(TimeRange.fromStartEnd(currentEventEndTime, nextEventStartTime, /* {inclusive}= */ false));
+          }
         }
       }
 
-      if (TimeRange.END_OF_DAY - lastEventEndTime >= meetingDuration)
+      if (TimeRange.END_OF_DAY - lastEventEndTime >= meetingDuration) {
         meetingQueryOptions.add(TimeRange.fromStartEnd(lastEventEndTime, TimeRange.END_OF_DAY, true));
+      }
     }
     return meetingQueryOptions;
   }
