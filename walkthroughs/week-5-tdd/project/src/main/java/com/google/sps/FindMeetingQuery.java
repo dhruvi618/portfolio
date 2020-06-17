@@ -31,21 +31,22 @@ public final class FindMeetingQuery {
     
     Collection<String> requiredAttendees = request.getAttendees();
     Collection<String> optionalAttendees = request.getOptionalAttendees();
+
+    if (requiredAttendees.isEmpty()) {
+      return findMeetingTime(optionalAttendees, events, meetingDuration);
+    }
+    if (optionalAttendees.isEmpty()) {
+      return findMeetingTime(requiredAttendees, events, meetingDuration);
+    }
+
+    // Try finding a suitable meeting time for all attendees and if no time exists, priortize required attendees
     Collection<String> allAttendees = new ArrayList<String>() {{
       addAll(requiredAttendees);
       addAll(optionalAttendees);
     }};
-
-    if (requiredAttendees.isEmpty()) {
-      return findMeetingTime(optionalAttendees, events, meetingDuration);
-    } else if (optionalAttendees.isEmpty()) {
+    meetingOptions = findMeetingTime(allAttendees, events, meetingDuration);
+    if (meetingOptions.isEmpty()) {
       return findMeetingTime(requiredAttendees, events, meetingDuration);
-    } else {
-      // Try finding a suitable meeting time for all attendees and if no time exists, priortize required attendees
-      meetingOptions = findMeetingTime(allAttendees, events, meetingDuration);
-      if (meetingOptions.isEmpty()) {
-        return findMeetingTime(requiredAttendees, events, meetingDuration);
-      }
     }
     return meetingOptions;
   }
@@ -78,17 +79,14 @@ public final class FindMeetingQuery {
         int i = 0;
         TimeRange currentEvent = eventsSortedByStartTime.get(i);
         TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
-        while (i < numberOfEvents - 1) { 
-          if (currentEvent.overlaps(nextEvent)) {
-            nextEvent = eventsSortedByStartTime.get(i + 1);
-          } else {
+        for (i = 0; i < numberOfEvents - 1; i++) { 
+          if (!currentEvent.overlaps(nextEvent)) {
             if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
               meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
             }
             currentEvent = eventsSortedByStartTime.get(i);
-            nextEvent = eventsSortedByStartTime.get(i + 1);
           }
-          i++;
+          nextEvent = eventsSortedByStartTime.get(i + 1);
         }
       }
 
