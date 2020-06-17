@@ -22,25 +22,47 @@ import java.util.List;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> requiredAttendees = request.getAttendees();
+    List<TimeRange> meetingOptions = new ArrayList<>();
     long meetingDuration = request.getDuration();
-    List<TimeRange> meetingQueryOptions = new ArrayList<>();
 
     if (meetingDuration > TimeRange.WHOLE_DAY.duration() || meetingDuration <= 0) {
-      return meetingQueryOptions;
+      return meetingOptions;
     }
     
+    Collection<String> requiredAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    Collection<String> allAttendees = new ArrayList<String>() {{
+      addAll(requiredAttendees);
+      addAll(optionalAttendees);
+    }};
+
+    if (requiredAttendees.isEmpty()) {
+      return findMeetingTime(optionalAttendees, events, meetingDuration);
+    } else if (optionalAttendees.isEmpty()) {
+      return findMeetingTime(requiredAttendees, events, meetingDuration);
+    } else {
+      // Try finding a suitable meeting time for all attendees and if no time exists, priortize required attendees
+      meetingOptions = findMeetingTime(allAttendees, events, meetingDuration);
+      if (meetingOptions.isEmpty()) {
+        return findMeetingTime(requiredAttendees, events, meetingDuration);
+      }
+    }
+    return meetingOptions;
+  }
+
+  public List<TimeRange> findMeetingTime(Collection<String> attendees, Collection<Event> events, long meetingDuration) {
+    List<TimeRange> meetingQueryOptions = new ArrayList<>();
     List<TimeRange> eventsSortedByStartTime = new ArrayList<>();
 
     for (Event event : events) {
       // Add event to events lists if meeting request contains attendees of the event  
-      if (!Collections.disjoint(requiredAttendees, event.getAttendees())) {
+      if (!Collections.disjoint(attendees, event.getAttendees())) {
         eventsSortedByStartTime.add(event.getWhen());
       }
     }
     Collections.sort(eventsSortedByStartTime, TimeRange.ORDER_BY_START);
 
-    if (requiredAttendees.isEmpty() || eventsSortedByStartTime.isEmpty()) {
+    if (attendees.isEmpty() || eventsSortedByStartTime.isEmpty()) {
       meetingQueryOptions.add(TimeRange.WHOLE_DAY);
     } else {
       int numberOfEvents = eventsSortedByStartTime.size();
@@ -53,12 +75,20 @@ public final class FindMeetingQuery {
       }
 
       if (numberOfEvents > 1) {
-        for (int i = 0; i < numberOfEvents - 1; i++) {
-          int currentEventEndTime = eventsSortedByStartTime.get(i).end();
-          int nextEventStartTime = eventsSortedByStartTime.get(i + 1).start();
-          if (currentEventEndTime < nextEventStartTime && nextEventStartTime - currentEventEndTime >= meetingDuration) {
-            meetingQueryOptions.add(TimeRange.fromStartEnd(currentEventEndTime, nextEventStartTime, /* inclusive= */ false));
+        int i = 0;
+        TimeRange currentEvent = eventsSortedByStartTime.get(i);
+        TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
+        while (i < numberOfEvents - 1) { 
+          if (currentEvent.overlaps(nextEvent)) {
+            nextEvent = eventsSortedByStartTime.get(i + 1);
+          } else {
+            if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
+              meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
+            }
+            currentEvent = eventsSortedByStartTime.get(i);
+            nextEvent = eventsSortedByStartTime.get(i + 1);
           }
+          i++;
         }
       }
 
