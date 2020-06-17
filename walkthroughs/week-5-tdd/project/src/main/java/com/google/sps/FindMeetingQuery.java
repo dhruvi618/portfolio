@@ -53,9 +53,9 @@ public final class FindMeetingQuery {
       }
 
       if (numberOfEvents > 1) {
-        for (int currentEventIndex = 0; currentEventIndex < numberOfEvents - 1; currentEventIndex++) {
-          int currentEventEndTime = eventsSortedByStartTime.get(currentEventIndex).end();
-          int nextEventStartTime = eventsSortedByStartTime.get(currentEventIndex+1).start();
+        for (int i = 0; i < numberOfEvents - 1; i++) {
+          int currentEventEndTime = eventsSortedByStartTime.get(i).end();
+          int nextEventStartTime = eventsSortedByStartTime.get(i + 1).start();
           if (currentEventEndTime < nextEventStartTime && nextEventStartTime - currentEventEndTime >= meetingDuration) {
             meetingQueryOptions.add(TimeRange.fromStartEnd(currentEventEndTime, nextEventStartTime, /* inclusive= */ false));
           }
