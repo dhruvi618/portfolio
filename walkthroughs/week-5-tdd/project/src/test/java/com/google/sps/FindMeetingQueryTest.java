@@ -72,7 +72,7 @@ public final class FindMeetingQueryTest {
     int duration = TimeRange.WHOLE_DAY.duration() + 1;
     MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A), duration);
     
-    assertThat(query.query(NO_EVENTS, request)).containsExactly();
+    assertThat(query.query(NO_EVENTS, request)).isEmpty();
   }
 
   @Test
@@ -235,7 +235,7 @@ public final class FindMeetingQueryTest {
 
     MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A), DURATION_60_MINUTES);
 
-    assertThat(query.query(events, request)).containsExactly();
+    assertThat(query.query(events, request)).isEmpty();
   }
 
   @Test
@@ -360,6 +360,6 @@ public final class FindMeetingQueryTest {
     request.addOptionalAttendee(PERSON_A);
     request.addOptionalAttendee(PERSON_B);
 
-    assertThat(query.query(events, request)).containsExactly();
+    assertThat(query.query(events, request)).isEmpty();
   }
 }

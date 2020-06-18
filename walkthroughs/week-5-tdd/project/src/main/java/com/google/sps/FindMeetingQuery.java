@@ -39,11 +39,11 @@ public final class FindMeetingQuery {
       return findMeetingTime(requiredAttendees, events, meetingDuration);
     }
 
+    List<String> allAttendees = new ArrayList<>();
+    allAttendees.addAll(requiredAttendees);
+    allAttendees.addAll(optionalAttendees);
+
     // Try finding a suitable meeting time for all attendees and if no time exists, priortize required attendees
-    Collection<String> allAttendees = new ArrayList<String>() {{
-      addAll(requiredAttendees);
-      addAll(optionalAttendees);
-    }};
     meetingOptions = findMeetingTime(allAttendees, events, meetingDuration);
     if (meetingOptions.isEmpty()) {
       return findMeetingTime(requiredAttendees, events, meetingDuration);
@@ -63,6 +63,8 @@ public final class FindMeetingQuery {
     }
     Collections.sort(eventsSortedByStartTime, TimeRange.ORDER_BY_START);
 
+    System.out.println(eventsSortedByStartTime);
+
     if (attendees.isEmpty() || eventsSortedByStartTime.isEmpty()) {
       meetingQueryOptions.add(TimeRange.WHOLE_DAY);
     } else {
@@ -76,17 +78,21 @@ public final class FindMeetingQuery {
       }
 
       if (numberOfEvents > 1) {
-        int i = 0;
-        TimeRange currentEvent = eventsSortedByStartTime.get(i);
-        TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
-        for (i = 0; i < numberOfEvents - 1; i++) { 
-          if (!currentEvent.overlaps(nextEvent)) {
-            if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
-              meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
-            }
-            currentEvent = eventsSortedByStartTime.get(i);
+        // Loop over events and add meeting option if it satisfies conditions.
+        for (int i = 0; i < numberOfEvents - 1; i++) { 
+          TimeRange currentEvent = eventsSortedByStartTime.get(i);
+          TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
+          /** 
+           * Add time to meeting options if the current event ends prior to the next event starting 
+           * and there is adequate time for a meeting based on request. If the next event does not end
+           * before the current event, remove the event since no meeting time is possible within that range
+           */
+          if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
+            meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
+          } else if (currentEvent.end() > nextEvent.start()) {
+            eventsSortedByStartTime.remove(nextEvent);
+            numberOfEvents--;
           }
-          nextEvent = eventsSortedByStartTime.get(i + 1);
         }
       }
 
