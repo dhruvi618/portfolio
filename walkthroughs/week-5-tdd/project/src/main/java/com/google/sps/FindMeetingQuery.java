@@ -63,8 +63,6 @@ public final class FindMeetingQuery {
     }
     Collections.sort(eventsSortedByStartTime, TimeRange.ORDER_BY_START);
 
-    System.out.println(eventsSortedByStartTime);
-
     if (attendees.isEmpty() || eventsSortedByStartTime.isEmpty()) {
       meetingQueryOptions.add(TimeRange.WHOLE_DAY);
     } else {
@@ -82,16 +80,14 @@ public final class FindMeetingQuery {
         for (int i = 0; i < numberOfEvents - 1; i++) { 
           TimeRange currentEvent = eventsSortedByStartTime.get(i);
           TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
-          /** 
-           * Add time to meeting options if the current event ends prior to the next event starting 
-           * and there is adequate time for a meeting based on request. If the next event does not end
-           * before the current event, remove the event since no meeting time is possible within that range
-           */
+
+          // Add time to meeting options if the current event ends prior to the next event starting 
+          // and there is adequate time for a meeting based on request. If the next event does not end
+          // before the current event, remove the event since no meeting time is possible within that range
           if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
             meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
           } else if (currentEvent.end() > nextEvent.start()) {
-            eventsSortedByStartTime.remove(nextEvent);
-            numberOfEvents--;
+            i+=1;
           }
         }
       }
