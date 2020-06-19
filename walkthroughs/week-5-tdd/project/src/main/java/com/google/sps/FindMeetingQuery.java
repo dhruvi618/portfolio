@@ -76,8 +76,9 @@ public final class FindMeetingQuery {
       }
 
       if (numberOfEvents > 1) {
+        int i = 0;
         // Loop over events and add meeting option if it satisfies conditions.
-        for (int i = 0; i < numberOfEvents - 1; i++) { 
+        while (i < numberOfEvents - 1) {
           TimeRange currentEvent = eventsSortedByStartTime.get(i);
           TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
 
@@ -89,8 +90,9 @@ public final class FindMeetingQuery {
             // If the next event does not end before the current event, skip over the next event on next iteration 
             // of loop since no meeting is possible in that time range.
             // (i.e. Event 1: 9:00am-2:00pm, Event 2: 9:30am-1:00pm, Event 3: 3:00pm-5:00pm) skip over Event 2 
-            i+=1;
+            i++;
           }
+          i++;
         }
       }
 
