@@ -82,13 +82,13 @@ public final class FindMeetingQuery {
           TimeRange nextEvent = eventsSortedByStartTime.get(i + 1);
 
           // Add time to meeting options if the current event ends prior to the next event starting 
-          // and there is adequate time for a meeting based on request. If the next event does not end
-          // before the current event, skip over the next event on next iteration of loop since no meeting 
-          // is possible in that range.
-          // (i.e. Event 1: 9:00am-2:00pm, Event 2: 9:30am-1:00pm, Event 3: 3:00pm-5:00pm) Skip over Event 2 
+          // and there is adequate time for a meeting based on request. 
           if (currentEvent.end() < nextEvent.start() && nextEvent.start() - currentEvent.end() >= meetingDuration) {
             meetingQueryOptions.add(TimeRange.fromStartEnd(currentEvent.end(), nextEvent.start(), /* inclusive= */ false));
           } else if (currentEvent.end() > nextEvent.start()) {
+            // If the next event does not end before the current event, skip over the next event on next iteration 
+            // of loop since no meeting is possible in that time range.
+            // (i.e. Event 1: 9:00am-2:00pm, Event 2: 9:30am-1:00pm, Event 3: 3:00pm-5:00pm) skip over Event 2 
             i+=1;
           }
         }
